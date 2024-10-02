@@ -7,11 +7,12 @@ This lesson teaches the basics of interacting with high-performance computing
 
 ## Using this material
 
-NOTE: This is *not* Carpentries boilerplate! Please read carefully.
+NOTE: This lesson is being transitioned to Carpentries Workbench but is still *not* Carpentries boilerplate! 
+Instructions below still need to be edited to reflect the transition. Proceed with caution.
 
-1. Follow the instructions found in The Carpentries' [example lesson][ex-lesson]
+1. ~~Follow the instructions found in The Carpentries' [example lesson][ex-lesson]
   to create a repository for your lesson. Install Ruby, Make, and Jekyll
-  following the instructions [here][setup].
+  following the instructions [here][setup].~~
 
 2. For easier portability, we use snippets of text and code to capture inputs
   and outputs that are host- or site-specific and cannot be scripted. These
@@ -37,17 +38,17 @@ NOTE: This is *not* Carpentries boilerplate! Please read carefully.
   or omit episodes, by editing the configuration block under `episode_names`
   in this file.
 
-4. Set the environment variable `HPC_JEKYLL_CONFIG` to the relative path of the
-  configuration file in your snippets folder:
+4. ~~Set the environment variable `HPC_JEKYLL_CONFIG` to the relative path of the
+  configuration file in your snippets folder:~~
   
   ```bash
   export HPC_JEKYLL_CONFIG=_includes/snippets_library/.../_config_options.yml
   ```
 
-5. Preview the lesson locally, by running `make serve`. You can then view the
+5. ~~Preview the lesson locally, by running `make serve`. You can then view the
   website in your browser, following the links in the output (usually,
   <https://localhost:4000>). Pages will be automatically regenerated every
-  time you write to them.
+  time you write to them.~~
 
 6. If there are discrepancies in the output, edit the snippet file containing
   it, or create a new one and customize.
