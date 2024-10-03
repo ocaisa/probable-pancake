@@ -68,6 +68,7 @@ Instructions below still need to be edited to reflect the transition. Proceed wi
   future will probably not be accepted.
 
 ## Deploying a Customized Lesson
+**While this lesson is in transition, we do not recommend customizing**
 
 The steps above will help you port the default HPC Intro lesson to your
 specific cluster, but the changes will only be visible on your local machine.
