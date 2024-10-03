@@ -1,5 +1,5 @@
 ---
-title: "Working on a remote HPC system"
+title: "EPCC version - Working on a remote HPC system"
 teaching: 25
 exercises: 10
 ---
