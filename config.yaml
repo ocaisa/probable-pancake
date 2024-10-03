@@ -67,6 +67,7 @@ contact: 'team@carpentries.org'
 episodes: 
 - 10-hpc-intro.md
 - 11-connecting.md
+- 11-epcc-hpc-intro.Rmd
 - 12-cluster.md
 - 13-scheduler.md
 - 14-environment-variables.md
