@@ -1,50 +1,51 @@
 ---
 local:
-  prompt: "[user@laptop ~]$"
-  bash_shebang: "#!/bin/bash"
+  prompt: "[you@laptop:~]$"
+  bash_shebang: "#!/usr/bin/env bash"
 
-snippets: EPCC_ARCHER2_slurm
-baseurl: "https://epcced.github.io/2023-06-28-uoe-hpcintro"
+snippets: HPCC_MagicCastle_slurm
+baseurl: "https://jlchang.github.io/probable-pancake/"
 
 remote:
-  name: "ARCHER2"
-  host_id: "EPCC_ARCHER2"
-  login: "login.archer2.ac.uk"
-  host: "ln03"
-  node: "nid001053"
-  location: "EPCC, The University of Edinburgh"
-  homedir: "/home/ta114/ta114/"
-  user: "userid"
-  prompt: "userid@ln03:~>"
-  prompt_work: "userid@uan01:/work/ta114/ta114/userid>"
-  module_python3: "cray-python"
+  name: "HPC Carpentry's Cloud Cluster"
+  host_id: #"EPCC_ARCHER2"
+  login: "cluster.hpc-carpentry.org"
+  host: "login1"
+  node: "smnode1"
+  location: "cluster.hpc-carpentry.org"
+  homedir: "/home"
+  user: "yourUsername"
+  prompt: 'yourUsername@login1 ~]'
+  prompt_work: #"userid@uan01:/work/ta114/ta114/userid>"
+  module_python3: "Python"
   bash_shebang: "#!/bin/bash"
 
 sched:
   name: "Slurm"
-  partition: "standard"
-  reservation: "shortqos"
-  qos: "short"
-  budget: "short"
   submit:
     name: "sbatch"
-    options: "--partition=standard --qos=short"
+    options: ""
   queue:
-    debug: ""
-    testing: ""
+    debug: "smnode"
+    testing: "cpubase_bycore_b1"
   status: "squeue"
   flag:
-    user: "-u userid"
+    user: "-u yourUsername"
     interactive: ""
     histdetail: "-l -j"
-    name: "--job-name"
-    time: "--time"
-    queue: "--partition"
-    nodes: "--nodes"
+    name: "-J"
+    time: "-t"
+    queue: "-p"
+    nodes: ""
     tasks: ""
   del: "scancel"
   interactive: "srun"
   info: "sinfo"
   comment: "#SBATCH"
-  hist: "sacct"
-  project: ta114
+  hist: "sacct -u yourUsername"
+  hist_filter: ""
+  partition: "standard"
+  reservation: "shortqos"
+  qos: "short"
+  budget: "short"
+  project: 
