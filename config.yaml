@@ -70,8 +70,10 @@ episodes:
 - 12-cluster.md
 - 12-epcc-cluster.Rmd
 - 13-scheduler.md
-- 13-hpcc-scheduler.Rmd
 - 13-epcc-scheduler.Rmd
+- 13-hpcc-scheduler.Rmd
+- 13-hpcc-scheduler_submodule.Rmd
+- 13-epcc-scheduler_submodule.Rmd
 - 14-environment-variables.md
 - 15-modules.md
 - 16-transferring-files.md

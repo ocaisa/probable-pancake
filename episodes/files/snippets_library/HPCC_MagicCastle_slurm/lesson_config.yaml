@@ -5,7 +5,7 @@ local:
 
 snippets: HPCC_MagicCastle_slurm
 baseurl: "https://jlchang.github.io/probable-pancake/"
-local_snippets: EPCC_ARCHER2_slurm
+local_snippets: 
 
 remote:
   name: "HPC Carpentry's Cloud Cluster"

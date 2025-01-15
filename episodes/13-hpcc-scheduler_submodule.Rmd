@@ -1,14 +1,19 @@
 ---
-title: "HPCC version - Scheduler Fundamentals"
+title: "HPCC snippets_library version - Scheduler Fundamentals"
 teaching: 45
 exercises: 30
 ---
 
 ```{r load_config, include=FALSE}
 library(yaml)
-config <- yaml.load_file("lesson_config.yaml")
+config <- yaml.load_file("files/snippets_library/HPCC_MagicCastle_slurm/lesson_config.yaml")
 snippets <- paste('files/snippets_library/', config$snippets, sep='')
 
+#load local values 
+if (is.character(config$local_snippets)) {
+config <- yaml.load_file("files/snippets_library/EPCC_ARCHER2_slurm/lesson_config.yaml")
+snippets <- paste('files/snippets_library/', config$local_snippets, sep='')
+}
 ```
 
 ::::::::::::::::::::::::::::::::::::::: objectives
