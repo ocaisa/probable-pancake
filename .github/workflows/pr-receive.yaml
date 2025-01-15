@@ -2,8 +2,7 @@ name: "Receive Pull Request"
 
 on:
   pull_request:
-    types:
-      [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened]
 
 concurrency:
   group: ${{ github.ref }}
@@ -13,7 +12,7 @@ jobs:
   test-pr:
     name: "Record PR number"
     if: ${{ github.event.action != 'closed' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     outputs:
       is_valid: ${{ steps.check-pr.outputs.VALID }}
     steps:

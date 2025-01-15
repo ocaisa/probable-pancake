@@ -2,13 +2,12 @@ name: "Bot: Send Close Pull Request Signal"
 
 on:
   pull_request:
-    types:
-      [closed]
+    types: [closed]
 
 jobs:
   send-close-signal:
     name: "Send closing signal"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: ${{ github.event.action == 'closed' }}
     steps:
       - name: "Create PRtifact"
@@ -20,4 +19,3 @@ jobs:
         with:
           name: pr
           path: ./pr
-
