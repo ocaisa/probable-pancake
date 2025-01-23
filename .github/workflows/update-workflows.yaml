@@ -4,16 +4,16 @@ on:
   workflow_dispatch:
     inputs:
       name:
-        description: "Who triggered this build (enter github username to tag yourself)?"
+        description: 'Who triggered this build (enter github username to tag yourself)?'
         required: true
-        default: "weekly run"
+        default: 'weekly run'
       clean:
         description: 'Workflow files/file extensions to clean (no wildcards, enter "" for none)'
         required: false
-        default: ".yaml"
+        default: '.yaml'
   schedule:
     # Run every Tuesday
-    - cron: "0 0 * * 2"
+    - cron: '0 0 * * 2'
 
 jobs:
   check_token:
@@ -31,7 +31,7 @@ jobs:
 
   update_workflow:
     name: "Update Workflow"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: check_token
     if: ${{ needs.check_token.outputs.workflow == 'true' }}
     steps:
