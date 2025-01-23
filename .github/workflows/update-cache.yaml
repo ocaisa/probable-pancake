@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       name:
-        description: "Who triggered this build (enter github username to tag yourself)?"
+        description: 'Who triggered this build (enter github username to tag yourself)?'
         required: true
-        default: "monthly run"
+        default: 'monthly run'
   schedule:
     # Run every tuesday
-    - cron: "0 0 * * 2"
+    - cron: '0 0 * * 2'
 
 jobs:
   preflight:
@@ -36,7 +36,7 @@ jobs:
 
   check_renv:
     name: "Check if We Need {renv}"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: preflight
     if: ${{ needs.preflight.outputs.ok == 'true'}}
     outputs:
@@ -52,7 +52,7 @@ jobs:
 
   check_token:
     name: "Check SANDPAPER_WORKFLOW token"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: check_renv
     if: ${{ needs.check_renv.outputs.needed == 'true' }}
     outputs:
@@ -69,11 +69,12 @@ jobs:
     name: "Update Package Cache"
     needs: check_token
     if: ${{ needs.check_token.outputs.repo== 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       RENV_PATHS_ROOT: ~/.local/share/renv/
     steps:
+
       - name: "Checkout Lesson"
         uses: actions/checkout@v4
 
