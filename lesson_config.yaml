@@ -48,4 +48,5 @@ sched:
   reservation: "shortqos"
   qos: "short"
   budget: "short"
-  project: 
+  project: ""
+main_config: "lesson_config_hpcc.yaml"
