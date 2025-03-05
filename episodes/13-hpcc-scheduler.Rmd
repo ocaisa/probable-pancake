@@ -4,10 +4,9 @@ teaching: 45
 exercises: 30
 ---
 
-```{r load_config, include=FALSE}
-library(yaml)
-config <- yaml.load_file("lesson_config.yaml")
-snippets <- paste('files/snippets/', config$snippets, sep='')
+```{r, echo=FALSE}
+# Source the external configuration script
+source("load_config.R")
 ```
 
 ::::::::::::::::::::::::::::::::::::::: objectives
@@ -26,6 +25,12 @@ snippets <- paste('files/snippets/', config$snippets, sep='')
 - How do I capture the output of a program that is run on a node in the cluster?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+### Section 1
+```{r child=choose_doc("section1.rmd")}
+```
+
+Tester
 
 ## Job Scheduler
 
