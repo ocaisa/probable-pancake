@@ -27,10 +27,14 @@ source("load_config.R")
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Section 1
-```{r child=choose_doc("section1.rmd")}
+
+We are testing the snippet library mechanism, stay tuned!
+
+```{r comment="Does this work??",
+    child=choose_doc("section1.rmd")}
 ```
 
-Tester
+How does spacing look?
 
 ## Job Scheduler
 
