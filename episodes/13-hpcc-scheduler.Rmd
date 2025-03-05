@@ -30,8 +30,7 @@ source("load_config.R")
 
 We are testing the snippet library mechanism, stay tuned!
 
-```{r comment="Does this work??",
-    child=choose_doc("section1.rmd")}
+```{r child=choose_doc("section1.rmd")}
 ```
 
 How does spacing look?
