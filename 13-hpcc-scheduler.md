@@ -23,6 +23,15 @@ exercises: 30
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+### Section 1
+
+We are testing the snippet library mechanism, stay tuned!
+
+
+I was hoping this would appear first.
+
+How does spacing look?
+
 ## Job Scheduler
 
 An HPC system might have thousands of nodes and thousands of users. How do we
