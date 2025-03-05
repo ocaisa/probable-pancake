@@ -77,7 +77,7 @@ manner. Our shell script will have three parts:
   name of the machine the script is run on.
 
 ```bash
-yourUsername@login1 ~]nano example-job.sh
+[yourUsername@login1 ~]nano example-job.sh
 ```
 
 ```output
@@ -98,7 +98,7 @@ Run the script. Does it execute on the cluster or just our login node?
 ## Solution
 
 ```bash
-yourUsername@login1 ~]bash example-job.sh
+[yourUsername@login1 ~]bash example-job.sh
 ```
 
 ```output
@@ -120,8 +120,8 @@ a compute node which the queuing system has identified as being
 available to perform the work.
 
 ```bash
-# yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
-yourUsername@login1 ~]sbatchr config$sched$submit$options` example-job.sh
+# [yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
+[yourUsername@login1 ~]sbatchr config$sched$submit$options` example-job.sh
 ```
 
 
@@ -136,7 +136,7 @@ status, we check the queue using the command
 `squeue -u yourUsername`.
 
 ```bash
-yourUsername@login1 ~]squeue -u yourUsername
+[yourUsername@login1 ~]squeue -u yourUsername
 ```
 
 ```output
@@ -185,12 +185,12 @@ script, but the `-J` option can be used to change the
 name of a job. Add an option to the script:
 
 ```bash
-yourUsername@login1 ~]cat example-job.sh
+[yourUsername@login1 ~] cat example-job.sh
 ```
 
 ```output
 #!/bin/bash
-#SBATCH-Jhello-world
+#SBATCH -J hello-world
 
 echo -n "This script is running on "
 hostname
@@ -199,8 +199,8 @@ hostname
 Submit the job and monitor its status:
 
 ```bash
-yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
-yourUsername@login1 ~]squeue -u yourUsername
+[yourUsername@login1 ~] sbatch  example-job.sh
+[yourUsername@login1 ~] squeue -u yourUsername
 ```
 
 ```output
@@ -259,7 +259,7 @@ for it on the cluster.
 ## Solution
 
 ```bash
-yourUsername@login1 ~]cat example-job.sh
+[yourUsername@login1 ~]cat example-job.sh
 ```
 
 ```output
@@ -272,7 +272,7 @@ hostname
 ```
 
 ```bash
-yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
+[yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
 ```
 
 Why are the Slurm runtime and `sleep` time not identical?
@@ -288,7 +288,7 @@ killed. Let's use wall time as an example. We will request 1 minute of
 wall time, and attempt to run a job for two minutes.
 
 ```bash
-yourUsername@login1 ~]cat example-job.sh
+[yourUsername@login1 ~]cat example-job.sh
 ```
 
 ```output
@@ -305,12 +305,12 @@ Submit the job and wait for it to finish. Once it is has finished, check the
 log file.
 
 ```bash
-yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
-yourUsername@login1 ~]squeue -u yourUsername
+[yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
+[yourUsername@login1 ~]squeue -u yourUsername
 ```
 
 ```bash
-yourUsername@login1 ~]cat slurm-12.out
+[yourUsername@login1 ~]cat slurm-12.out
 ```
 
 ```output
@@ -338,8 +338,8 @@ its job number (remember to change the walltime so that it runs long enough for
 you to cancel it before it is killed!).
 
 ```bash
-yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
-yourUsername@login1 ~]squeue -u yourUsername
+[yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
+[yourUsername@login1 ~]squeue -u yourUsername
 ```
 
 ```output
@@ -354,9 +354,9 @@ return of your command prompt indicates that the request to cancel the job was
 successful.
 
 ```bash
-yourUsername@login1 ~]{{site.sched.del }} 38759
+[yourUsername@login1 ~]{{site.sched.del }} 38759
 # It might take a minute for the job to disappear from the queue...
-yourUsername@login1 ~]squeue -u yourUsername
+[yourUsername@login1 ~]squeue -u yourUsername
 ```
 
 ```output
@@ -380,15 +380,15 @@ Try submitting multiple jobs and then cancelling them all.
 First, submit a trio of jobs:
 
 ```bash
-yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
-yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
-yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
+[yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
+[yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
+[yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh
 ```
 
 Then, cancel them all:
 
 ```bash
-yourUsername@login1 ~]scancel -u yourUsername
+[yourUsername@login1 ~]scancel -u yourUsername
 ```
 
 :::::::::::::::::::::::::
@@ -412,7 +412,7 @@ exits. Let's demonstrate this by running the `hostname` command with
 job with `Ctrl-c`.)
 
 ```bash
-yourUsername@login1 ~]srun hostname
+[yourUsername@login1 ~]srun hostname
 ```
 
 ```output
@@ -425,7 +425,7 @@ these options are specified on the command-line when starting a job. To submit
 a job that uses 2 CPUs for instance, we could use the following command:
 
 ```bash
-yourUsername@login1 ~]srun -n 2 echo "This job will use 2 CPUs."
+[yourUsername@login1 ~]srun -n 2 echo "This job will use 2 CPUs."
 ```
 
 ```output
@@ -444,7 +444,7 @@ went wrong with a previous job. Fortunately, Slurm makes it
 easy to start an interactive job with `srun`:
 
 ```bash
-yourUsername@login1 ~]srun --pty bash
+[yourUsername@login1 ~]srun --pty bash
 ```
 
 You should be presented with a bash prompt. Note that the prompt will likely
