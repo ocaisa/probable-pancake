@@ -4,7 +4,7 @@ local:
   bash_shebang: "#!/usr/bin/env bash"
 
 snippets: HPCC_MagicCastle_slurm
-baseurl: "https://jlchang.github.io/probable-pancake/"
+baseurl: "https://ocaisa.github.io/probable-pancake/"
 
 remote:
   name: "HPC Carpentry's Cloud Cluster"
@@ -15,7 +15,7 @@ remote:
   location: "cluster.hpc-carpentry.org"
   homedir: "/home"
   user: "yourUsername"
-  prompt: 'yourUsername@login1 ~]'
+  prompt: '[yourUsername@login1 ~]'
   prompt_work: #"userid@uan01:/work/ta114/ta114/userid>"
   module_python3: "Python"
   bash_shebang: "#!/bin/bash"

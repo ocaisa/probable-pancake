@@ -483,7 +483,7 @@ which will print the name of the machine the script is run on.</li>
 </ul><div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]nano example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]nano example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -510,12 +510,12 @@ node?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]bash example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]bash example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -536,8 +536,8 @@ identified as being available to perform the work.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]sbatchr config<span class="va">$sched$submit$options</span><span class="kw">`</span> <span class="ex">example-job.sh</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># [yourUsername@login1 ~]sbatch{% if site.sched.submit.options != '' %} {% endif %}example-job.sh</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]sbatchr config<span class="va">$sched$submit$options</span><span class="kw">`</span> <span class="ex">example-job.sh</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -552,7 +552,7 @@ the command <code>squeue -u yourUsername</code>.</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]squeue <span class="at">-u</span> yourUsername</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]squeue <span class="at">-u</span> yourUsername</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -602,13 +602,13 @@ the name of a job. Add an option to the script:</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]cat example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~] cat example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>#!/bin/bash
-#SBATCH-Jhello-world
+#SBATCH -J hello-world
 
 echo -n "This script is running on "
 hostname</code></pre>
@@ -617,8 +617,8 @@ hostname</code></pre>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]sbatch{% if site.sched.submit.options != <span class="st">''</span> %} {% endif %}example-job.sh</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]squeue <span class="at">-u</span> yourUsername</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~] sbatch  example-job.sh</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~] squeue <span class="at">-u</span> yourUsername</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -677,12 +677,12 @@ then submit a job for it on the cluster.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]cat example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]cat example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -697,7 +697,7 @@ hostname</code></pre>
 <div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]sbatch{% if site.sched.submit.options != <span class="st">''</span> %} {% endif %}example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]sbatch{% if site.sched.submit.options != <span class="st">''</span> %} {% endif %}example-job.sh</span></code></pre>
 </div>
 <p>Why are the Slurm runtime and <code>sleep</code> time not
 identical?</p>
@@ -711,7 +711,7 @@ minute of wall time, and attempt to run a job for two minutes.</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]cat example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]cat example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -729,13 +729,13 @@ check the log file.</p>
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]sbatch{% if site.sched.submit.options != <span class="st">''</span> %} {% endif %}example-job.sh</span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]squeue <span class="at">-u</span> yourUsername</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]sbatch{% if site.sched.submit.options != <span class="st">''</span> %} {% endif %}example-job.sh</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]squeue <span class="at">-u</span> yourUsername</span></code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]cat slurm-12.out</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]cat slurm-12.out</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -764,8 +764,8 @@ it runs long enough for you to cancel it before it is killed!).</p>
 <div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]sbatch{% if site.sched.submit.options != <span class="st">''</span> %} {% endif %}example-job.sh</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]squeue <span class="at">-u</span> yourUsername</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]sbatch{% if site.sched.submit.options != <span class="st">''</span> %} {% endif %}example-job.sh</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]squeue <span class="at">-u</span> yourUsername</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -781,9 +781,9 @@ the job was successful.</p>
 <div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]{{site.sched.del }} 38759</span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]{{site.sched.del }} 38759</span>
 <span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="co"># It might take a minute for the job to disappear from the queue...</span></span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]squeue <span class="at">-u</span> yourUsername</span></code></pre>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]squeue <span class="at">-u</span> yourUsername</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -809,21 +809,21 @@ yourself). Note that you can only delete your own jobs.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>First, submit a trio of jobs:</p>
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]sbatch{% if site.sched.submit.options != <span class="st">''</span> %} {% endif %}example-job.sh</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]sbatch{% if site.sched.submit.options != <span class="st">''</span> %} {% endif %}example-job.sh</span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]sbatch{% if site.sched.submit.options != <span class="st">''</span> %} {% endif %}example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]sbatch{% if site.sched.submit.options != <span class="st">''</span> %} {% endif %}example-job.sh</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]sbatch{% if site.sched.submit.options != <span class="st">''</span> %} {% endif %}example-job.sh</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]sbatch{% if site.sched.submit.options != <span class="st">''</span> %} {% endif %}example-job.sh</span></code></pre>
 </div>
 <p>Then, cancel them all:</p>
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]scancel <span class="at">-u</span> yourUsername</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]scancel <span class="at">-u</span> yourUsername</span></code></pre>
 </div>
 </div>
 </div>
@@ -846,7 +846,7 @@ with <code>Ctrl-c</code>.)</p>
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]srun hostname</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]srun hostname</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -860,7 +860,7 @@ for instance, we could use the following command:</p>
 <div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]srun <span class="at">-n</span> 2 echo <span class="st">"This job will use 2 CPUs."</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]srun <span class="at">-n</span> 2 echo <span class="st">"This job will use 2 CPUs."</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -879,7 +879,7 @@ makes it easy to start an interactive job with <code>srun</code>:</p>
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="ex">yourUsername@login1</span> ~]srun <span class="at">--pty</span> bash</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="ex">[yourUsername@login1</span> ~]srun <span class="at">--pty</span> bash</span></code></pre>
 </div>
 <p>You should be presented with a bash prompt. Note that the prompt will
 likely change to reflect your new location, in this case the compute
