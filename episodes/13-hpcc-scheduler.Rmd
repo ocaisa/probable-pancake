@@ -186,12 +186,12 @@ script, but the ``r config$sched$flag$name`` option can be used to change the
 name of a job. Add an option to the script:
 
 ```bash
-`r config$remote$prompt`cat example-job.sh
+`r config$remote$prompt` cat example-job.sh
 ```
 
 ```output
 `r config$remote$bash_shebang`
-`r config$sched$comment``r config$sched$flag$name`hello-world
+`r config$sched$comment` `r config$sched$flag$name` hello-world
 
 echo -n "This script is running on "
 hostname
@@ -200,8 +200,8 @@ hostname
 Submit the job and monitor its status:
 
 ```bash
-`r config$remote$prompt``r config$sched$submit$name`{% if site.sched.submit.options != '' %}`r config$sched$submit$options` {% endif %}example-job.sh
-`r config$remote$prompt``r config$sched$status` `r config$sched$flag$user`
+`r config$remote$prompt` `r config$sched$submit$name` `r config$sched$submit$options` example-job.sh
+`r config$remote$prompt` `r config$sched$status` `r config$sched$flag$user`
 ```
 
 ```output
