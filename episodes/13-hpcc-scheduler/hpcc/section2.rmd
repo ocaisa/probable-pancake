@@ -1,0 +1,8 @@
+---
+layout: page
+author: Alan O'Cais
+comment: Snippet test
+---
+::: discussion
+This is a second snippet that only appears in the backup.
+:::

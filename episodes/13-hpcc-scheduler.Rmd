@@ -28,12 +28,24 @@ source("load_config.R")
 
 ### Section 1
 
-We are testing the snippet library mechanism, stay tuned!
+We are testing the snippet library mechanism, stay tuned! This appears in the as part of the main configuration.
 
 ```{r child=choose_doc("section1.rmd")}
 ```
 
-How does spacing look?
+### Section 2
+
+This one is only part of the backup.
+
+```{r child=choose_doc("section2.rmd")}
+```
+
+### Section 3
+
+```{r child=choose_doc("section3.rmd")}
+```
+
+And the above shouldn't appear at all.
 
 ## Job Scheduler
 
