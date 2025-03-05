@@ -33,7 +33,7 @@ life_cycle: 'alpha'
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://github.com/tobyhodges/probable-pancake'
+source: 'https://github.com/ocaisa/probable-pancake'
 
 # Default branch of your lesson
 branch: 'main'
@@ -95,6 +95,6 @@ profiles:
 
 
 carpentry_description: Lesson Description
-url: 'https://tkphd.github.io/hpc-intro-online'
+url: 'https://ocaisa.github.io/probable_pancake'
 analytics: carpentries
 lang: en
