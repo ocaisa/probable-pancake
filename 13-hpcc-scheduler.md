@@ -25,12 +25,30 @@ exercises: 30
 
 ### Section 1
 
-We are testing the snippet library mechanism, stay tuned!
+We are testing the snippet library mechanism, stay tuned! This appears in the as part of the main configuration.
 
 
 I was hoping this would appear first.
 
-How does spacing look?
+### Section 2
+
+This one is only part of the backup.
+
+
+
+
+
+
+
+::: discussion
+This is a second snippet that only appears in the backup.
+:::
+
+### Section 3
+
+
+
+And the above shouldn't appear at all.
 
 ## Job Scheduler
 
