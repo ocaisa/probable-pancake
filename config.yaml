@@ -20,7 +20,7 @@ carpentry: 'cp'
 title: 'Introduction to High-Performance Computing'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: 2017-03-24 
+created: 2017-03-24
 
 # Comma-separated list of keywords for the lesson
 keywords: 'software, data, lesson, The Carpentries'
@@ -64,29 +64,26 @@ contact: 'team@carpentries.org'
 # - another-learner.md
 
 # Order of episodes in your lesson
-episodes: 
-- 10-hpc-intro.md
-- 11-connecting.md
-- 12-cluster.md
-- 12-epcc-cluster.Rmd
-- 13-scheduler.md
-- 13-hpcc-scheduler.Rmd
-- 13-epcc-scheduler.Rmd
-- 14-environment-variables.md
-- 15-modules.md
-- 16-transferring-files.md
-- 17-parallel.md
-- 18-resources.md
-- 19-responsibility.md
+episodes:
+  - 10-hpc-intro.md
+  - 11-connecting.Rmd
+  - 12-cluster.Rmd
+  - 13-scheduler.Rmd
+  - 14-environment-variables.Rmd
+  - 15-modules.Rmd
+  - 16-transferring-files.Rmd
+  - 17-parallel.Rmd
+  - 18-resources.Rmd
+  - 19-responsibility.Rmd
 
 # Information for Learners
-learners: 
+learners:
 
 # Information for Instructors
-instructors: 
+instructors:
 
 # Learner Profiles
-profiles: 
+profiles:
 
 # Customisation ---------------------------------------------
 #

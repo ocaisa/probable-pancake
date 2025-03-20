@@ -1,10 +1,12 @@
 ::: challenge
+
 ## Running parallel jobs
+
 Modify the pi-mpi-run script that you used above to use all 128 cores on
 one node.  Check the output to confirm that it used the correct number
 of cores in parallel for the calculation.
 
-::: solution
+:::: solution
 Here is a modified script
 
 ```bash
@@ -21,5 +23,5 @@ Here is a modified script
 module load cray-python
 srun python pi-mpi.py 10000000
 ```
-:::
+::::
 :::

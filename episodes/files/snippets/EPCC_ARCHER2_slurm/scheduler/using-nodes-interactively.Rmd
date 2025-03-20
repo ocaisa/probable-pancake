@@ -5,6 +5,7 @@ Let's demonstrate this by running the
 ```bash
 `r config$host_prompt_work` srun `r config$sched$submit$options` --time=00:01:00 hostname
 ```
+
 ```output
 nid001976
 ```

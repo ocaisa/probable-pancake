@@ -61,5 +61,3 @@ sched:
   info: "sinfo"
   comment: "#SBATCH"
   hist: "sacct"
-
-

@@ -54,7 +54,7 @@ problems in parallel**.
 
 ## Jargon Busting Presentation
 
-Open the [HPC Jargon Buster]({{ site.url }}files/jargon#p1)
+Open the [HPC Jargon Buster](../files/jargon#p1)
 in a new tab. To present the content, press `C` to open a **c**lone in a
 separate window, then press `P` to toggle **p**resentation mode.
 

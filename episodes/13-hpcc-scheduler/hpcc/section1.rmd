@@ -1,6 +1,0 @@
----
-layout: page
-author: Alan O'Cais
-comment: Snippet test
----
-I was hoping this would appear.
