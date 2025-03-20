@@ -70,7 +70,7 @@ episodes:
   - 12-cluster.Rmd
   - 13-scheduler.Rmd
   - 14-environment-variables.Rmd
-  - 15-modules.md
+  - 15-modules.Rmd
   - 16-transferring-files.md
   - 17-parallel.md
   - 18-resources.md
