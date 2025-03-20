@@ -71,7 +71,7 @@ episodes:
   - 13-scheduler.Rmd
   - 14-environment-variables.Rmd
   - 15-modules.Rmd
-  - 16-transferring-files.md
+  - 16-transferring-files.Rmd
   - 17-parallel.md
   - 18-resources.md
   - 19-responsibility.md
