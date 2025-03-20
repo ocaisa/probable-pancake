@@ -1,3 +1,4 @@
+```bash
 #!/bin/bash
 
 #SBATCH --partition=standard
@@ -7,3 +8,4 @@
 echo 'This script is running on:'
 hostname
 sleep 120
+```
