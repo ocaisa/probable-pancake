@@ -17,6 +17,8 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+
+
 ## Secure Connections
 
 The first step in using a cluster is to establish a connection from our laptop
@@ -56,7 +58,7 @@ When logging in to a laptop, tablet, or other personal device, a username,
 password, or pattern are normally required to prevent unauthorized access. In
 these situations, the likelihood of somebody else intercepting your password is
 low, since logging your keystrokes requires a malicious exploit or physical
-access. For systems like {{ site.remote.host }} running an SSH server, anybody
+access. For systems like `login1` running an SSH server, anybody
 on the network can log in, or try to. Since usernames are often public or easy
 to guess, your password is often the weakest link in the security chain. Many
 clusters therefore forbid password-based login, requiring instead that you
@@ -80,16 +82,18 @@ In this section you will create a pair of SSH keys:
 - a private key which you keep on your own computer, and
 - a public key which can be placed on any remote system you will access.
 
-> ## Private keys are your secure digital passport
-> 
-> A private key that is visible to anyone but you should be considered
-> compromised, and must be destroyed. This includes having improper permissions
-> on the directory it (or a copy) is stored in, traversing any network that is
-> not secure (encrypted), attachment on unencrypted email, and even displaying
-> the key on your terminal window.
-> 
-> Protect this key as if it unlocks your front door. In many ways, it does.
-> {: .caution}
+:::::::::::::::::::::::::::::::::::::::::  caution
+
+## Private keys are your secure digital passport
+
+A private key that is visible to anyone but you should be considered
+compromised, and must be destroyed. This includes having improper permissions
+on the directory it (or a copy) is stored in, traversing any network that is
+not secure (encrypted), attachment on unencrypted email, and even displaying
+the key on your terminal window.
+
+Protect this key as if it unlocks your front door. In many ways, it does.
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Regardless of the software or operating system you use, *please* choose a
 strong password or passphrase to act as another layer of protection for your
@@ -111,8 +115,6 @@ common approaches to this:
 3. Nothing is *less* secure than a private key with no password. If you
   skipped password entry by accident, go back and generate a new key pair
   *with* a strong password.
-  
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 #### SSH Keys on Linux, Mac, MobaXterm, and Windows Subsystem for Linux
@@ -121,7 +123,7 @@ Once you have opened a terminal, check for existing SSH keys and filenames
 since existing SSH keys are overwritten.
 
 ```bash
-{{ site.local.prompt }} ls ~/.ssh/
+[you@laptop:~]$ ls ~/.ssh/
 ```
 
 If `~/.ssh/id_ed25519` already exists, you will need to specify
@@ -140,7 +142,7 @@ produce a stronger key than the `ssh-keygen` default by invoking these flags:
   extension added.
 
 ```bash
-{{ site.local.prompt }} ssh-keygen -a 100 -f ~/.ssh/id_ed25519 -t ed25519
+[you@laptop:~]$ ssh-keygen -a 100 -f ~/.ssh/id_ed25519 -t ed25519
 ```
 
 When prompted, enter a strong password with the
@@ -165,7 +167,7 @@ If key generation failed because ed25519 is not available, try using the older
 check for an existing key:
 
 ```bash
-{{ site.local.prompt }} ls ~/.ssh/
+[you@laptop:~]$ ls ~/.ssh/
 ```
 
 If `~/.ssh/id_rsa` already exists, you will need to specify choose a different
@@ -177,7 +179,7 @@ name for the new key-pair. Generate it as above, with the following extra flags:
   rather than PEM.
 
 ```bash
-{{ site.local.prompt }} ssh-keygen -a 100 -b 4096 -f ~/.ssh/id_rsa -o -t rsa
+[you@laptop:~]$ ssh-keygen -a 100 -b 4096 -f ~/.ssh/id_rsa -o -t rsa
 ```
 
 When prompted, enter a strong password with the
@@ -233,7 +235,7 @@ type it in again.
 Open your terminal application and check if an agent is running:
 
 ```bash
-{{ site.local.prompt }} ssh-add -l
+[you@laptop:~]$ ssh-add -l
 ```
 
 - If you get an error like this one,
@@ -245,7 +247,7 @@ Open your terminal application and check if an agent is running:
   ... then you need to launch the agent as follows:
   
   ```bash
-  {{ site.local.prompt }} eval $(ssh-agent)
+  [you@laptop:~]$ eval $(ssh-agent)
   ```
   
   :::::::::::::::::::::::::::::::::::::::::  callout
@@ -258,7 +260,7 @@ Open your terminal application and check if an agent is running:
   shell commands that can be used to reach it -- but *does not execute them!*
   
   ```bash
-  {{ site.local.prompt }} ssh-agent
+  [you@laptop:~]$ ssh-agent
   ```
   
   ```output
@@ -283,7 +285,7 @@ Open your terminal application and check if an agent is running:
 Add your key to the agent, with session expiration after 8 hours:
 
 ```bash
-{{ site.local.prompt }} ssh-add -t 8h ~/.ssh/id_ed25519
+[you@laptop:~]$ ssh-add -t 8h ~/.ssh/id_ed25519
 ```
 
 ```output
@@ -302,27 +304,20 @@ See the [PuTTY documentation][putty-agent].
 
 ### Transfer Your Public Key
 
-{% if site.remote.portal %}
-Visit [{{ site.remote.portal }}]({{ site.remote.portal }}) to upload your SSH
-public key. (Remember, it's the one ending in `.pub`!)
-
-{% else %}
-Use the **s**ecure **c**o**p**y tool to send your public key to the cluster.
-
 ```bash
-{{ site.local.prompt }} scp ~/.ssh/id_ed25519.pub {{ site.remote.user }}@{{ site.remote.login }}:~/
+[you@laptop:~]$ scp ~/.ssh/id_ed25519.pub yourUsername@cluster.hpc-carpentry.org:~/
 ```
 
-{% endif %}
+
 
 ## Log In to the Cluster
 
 Go ahead and open your terminal or graphical SSH client, then log in to the
-cluster. Replace `{{ site.remote.user }}` with your username or the one
+cluster. Replace `yourUsername` with your username or the one
 supplied by the instructors.
 
 ```bash
-{{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
+[you@laptop:~]$ ssh yourUsername@cluster.hpc-carpentry.org
 ```
 
 You may be asked for your password. Watch out: the characters you type after
@@ -340,9 +335,9 @@ connected to the local system and the remote system will typically be different
 for every user. We still need to indicate which system we are entering commands
 on though so we will adopt the following convention:
 
-- `{{ site.local.prompt }}` when the command is to be entered on a terminal
+- `[you@laptop:~]$` when the command is to be entered on a terminal
   connected to your local computer
-- `{{ site.remote.prompt }}` when the command is to be entered on a
+- `[yourUsername@login1 ~]` when the command is to be entered on a
   terminal connected to the remote system
 - `$` when it really doesn't matter which system the terminal is connected to.
 
@@ -356,28 +351,28 @@ computer we are logged onto can be checked with the `hostname` command. (You
 may also notice that the current hostname is also part of our prompt!)
 
 ```bash
-{{ site.remote.prompt }} hostname
+[yourUsername@login1 ~] hostname
 ```
 
 ```output
-{{ site.remote.host }}
+login1
 ```
 
 So, we're definitely on the remote machine. Next, let's find out where we are
 by running `pwd` to **p**rint the **w**orking **d**irectory.
 
 ```bash
-{{ site.remote.prompt }} pwd
+[yourUsername@login1 ~] pwd
 ```
 
 ```output
-{{ site.remote.homedir }}/{{ site.remote.user }}
+/home/yourUsername
 ```
 
 Great, we know where we are! Let's see what's in our current directory:
 
 ```bash
-{{ site.remote.prompt }} ls
+[yourUsername@login1 ~] ls
 ```
 
 ```output
@@ -390,7 +385,7 @@ other filesystems. If they did not, your home directory may appear empty. To
 double-check, include hidden files in your directory listing:
 
 ```bash
-{{ site.remote.prompt }} ls -a
+[yourUsername@login1 ~] ls -a
 ```
 
 ```output
@@ -399,12 +394,10 @@ double-check, include hidden files in your directory listing:
 ```
 
 In the first column, `.` is a reference to the current directory and `..` a
-reference to its parent (`{{ site.remote.homedir }}`). You may or may not see
+reference to its parent (`/home`). You may or may not see
 the other files, or files like them: `.bashrc` is a shell configuration file,
 which you can edit with your preferences; and `.ssh` is a directory storing SSH
 keys and a record of authorized connections.
-
-{% unless site.remote.portal %}
 
 ### Install Your SSH Key
 
@@ -416,8 +409,6 @@ Policies and practices for handling SSH keys vary between HPC clusters:
 follow any guidance provided by the cluster administrators or
 documentation. In particular, if there is an online portal for managing SSH
 keys, use that instead of the directions outlined here.
-
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 If you transferred your SSH public key with `scp`, you should see
@@ -428,14 +419,14 @@ If the `.ssh` folder was not listed above, then it does not yet
 exist: create it.
 
 ```bash
-{{ site.remote.prompt }} mkdir ~/.ssh
+[yourUsername@login1 ~] mkdir ~/.ssh
 ```
 
 Now, use `cat` to print your public key, but redirect the output, appending it
 to the `authorized_keys` file:
 
 ```bash
-{{ site.remote.prompt }} cat ~/id_ed25519.pub >> ~/.ssh/authorized_keys
+[yourUsername@login1 ~] cat ~/id_ed25519.pub >> ~/.ssh/authorized_keys
 ```
 
 That's all! Disconnect, then try to log back into the remote: if your key and
@@ -443,16 +434,12 @@ agent have been configured correctly, you should not be prompted for the
 password for your SSH key.
 
 ```bash
-{{ site.remote.prompt }} logout
+[yourUsername@login1 ~] logout
 ```
 
 ```bash
-{{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
+[you@laptop:~]$ ssh yourUsername@cluster.hpc-carpentry.org
 ```
-
-{% endunless %}
-
-
 
 [gh-ssh]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
 [keepass]: https://keepass.info
@@ -463,14 +450,12 @@ password for your SSH key.
 [ssh-agent]: https://www.ssh.com/academy/ssh/agent
 [putty-agent]: https://tartarus.org/~simon/putty-prerel-snapshots/htmldoc/Chapter9.html#pageant
 
-
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - An HPC system is a set of networked machines.
 - HPC systems typically provide login nodes and a set of worker nodes.
-- The resources found on independent (worker) nodes can vary in volume and type (amount of RAM, processor architecture, availability of network mounted filesystems, etc.).
+- The resources found on independent (worker) nodes can vary in volume and type
+  (amount of RAM, processor architecture, availability of network mounted
+  filesystems, etc.).
 - Files saved on one node are available on all nodes.
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

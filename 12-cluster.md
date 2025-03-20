@@ -1,141 +1,178 @@
 ---
-title: Exploring Remote Resources
+title: "Working on a remote HPC system"
 teaching: 25
 exercises: 10
 ---
 
-::::::::::::::::::::::::::::::::::::::: objectives
 
-- Survey system resources using `nproc`, `free`, and the queuing system
-- Compare \& contrast resources on the local machine, login node, and worker nodes
-- Learn about the various filesystems on the cluster using `df`
-- Find out `who` else is logged in
-- Assess the number of idle and occupied nodes
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+::: questions
+- "What is an HPC system?"
+- "How does an HPC system work?"
+- "How do I log on to a remote HPC system?"
+:::
 
-:::::::::::::::::::::::::::::::::::::::: questions
+::: objectives
+- "Connect to a remote HPC system."
+- "Understand the general HPC system architecture."
+:::
 
-- How does my local computer compare to the remote systems?
-- How does the login node compare to the compute nodes?
-- Are all compute nodes alike?
+## What Is an HPC System?
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+The words "cloud", "cluster", and the phrase "high-performance computing" or
+"HPC" are used a lot in different contexts and with various related meanings.
+So what do they mean? And more importantly, how do we use them in our work?
 
-## Look Around the Remote System
+The *cloud* is a generic term commonly used to refer to computing resources
+that are a) *provisioned* to users on demand or as needed and b) represent real
+or *virtual* resources that may be located anywhere on Earth. For example, a
+large company with computing resources in Brazil, Zimbabwe and Japan may manage
+those resources as its own *internal* cloud and that same company may also
+utilize commercial cloud resources provided by Amazon or Google. Cloud
+resources may refer to machines performing relatively simple tasks such as
+serving websites, providing shared storage, providing web services (such as
+e-mail or social media platforms), as well as more traditional compute
+intensive tasks such as running a simulation.
 
-If you have not already connected to {{ site.remote.name }}, please do so now:
+The term *HPC system*, on the other hand, describes a stand-alone resource for
+computationally intensive workloads. They are typically comprised of a
+multitude of integrated processing and storage elements, designed to handle
+high volumes of data and/or large numbers of floating-point operations
+([FLOPS](https://en.wikipedia.org/wiki/FLOPS)) with the highest possible
+performance. For example, all of the machines on the
+[Top-500](https://www.top500.org) list are HPC systems. To support these
+constraints, an HPC resource must exist in a specific, fixed location:
+networking cables can only stretch so far, and electrical and optical signals
+can travel only so fast.
+
+The word "cluster" is often used for small to moderate scale HPC resources less
+impressive than the [Top-500](https://www.top500.org). Clusters are often
+maintained in computing centers that support several such systems, all sharing
+common networking and storage to support common compute intensive tasks.
+
+## Logging In
+
+The first step in using a cluster is to establish a connection from our laptop
+to the cluster. When we are sitting at a computer (or standing, or holding it
+in our hands or on our wrists), we have come to expect a visual display with
+icons, widgets, and perhaps some windows or applications: a graphical user
+interface, or GUI. Since computer clusters are remote resources that we connect
+to over often slow or laggy interfaces (WiFi and VPNs especially), it is more
+practical to use a command-line interface, or CLI, in which commands and
+results are transmitted via text, only. Anything other than text (images, for
+example) must be written to disk and opened with a separate program.
+
+If you have ever opened the Windows Command Prompt or macOS Terminal, you have
+seen a CLI. If you have already taken The Carpentries' courses on the UNIX
+Shell or Version Control, you have used the CLI on your local machine somewhat
+extensively. The only leap to be made here is to open a CLI on a *remote*
+machine, while taking some precautions so that other folks on the network can't
+see (or change) the commands you're running or the results the remote machine
+sends back. We will use the Secure SHell protocol (or SSH) to open an encrypted
+network connection between two machines, allowing you to send & receive text
+and data without having to worry about prying eyes.
+
+![Connect to cluster](fig/connect-to-remote.svg){alt-text="Connect to cluster"}
+
+Make sure you have a SSH client installed on your laptop. Refer to the
+[setup](../index.md) section for more details. SSH clients are
+usually command-line tools, where you provide the remote machine address as the
+only required argument. If your username on the remote system differs from what
+you use locally, you must provide that as well. If your SSH client has a
+graphical front-end, such as PuTTY or MobaXterm, you will set these arguments
+before clicking "connect." From the terminal, you'll write something like `ssh
+userName@hostname`, where the "@" symbol is used to separate the two parts of a
+single argument.
+
+Go ahead and open your terminal or graphical SSH client, then log in to the
+cluster using your username and the remote computer you can reach from the
+outside world, cluster.hpc-carpentry.org.
 
 ```bash
-{{ site.local.prompt }}  ssh {{ site.remote.user }}@{{ site.remote.login }}
+[you@laptop:~]$ ssh yourUsername@cluster.hpc-carpentry.org
 ```
 
-Take a look at your home directory on the remote system:
+Remember to replace `yourUsername` with your username or the one
+supplied by the instructors. You may be asked for your password. Watch out: the
+characters you type after the password prompt are not displayed on the screen.
+Normal output will resume once you press `Enter`.
+
+## Where Are We?
+
+Very often, many users are tempted to think of a high-performance computing
+installation as one giant, magical machine. Sometimes, people will assume that
+the computer they've logged onto is the entire computing cluster. So what's
+really happening? What computer have we logged on to? The name of the current
+computer we are logged onto can be checked with the `hostname` command. (You
+may also notice that the current hostname is also part of our prompt!)
 
 ```bash
-{{ site.remote.prompt }} ls
-```
-
-::::::::::::::::::::::::::::::::::::::  challenge
-
-## What's different between your machine and the remote?
-
-Open a second terminal window on your local computer and run the `ls` command
-(without logging in to {{ site.remote.name }}). What differences do you see?
-
-:::::::::::::::  solution
-
-## Solution
-
-You would likely see something more like this:
-
-```bash
-{{ site.local.prompt }} ls
+[yourUsername@login1 ~] hostname
 ```
 
 ```output
-Applications Documents    Library      Music        Public
-Desktop      Downloads    Movies       Pictures
+login1
 ```
 
-The remote computer's home directory shares almost nothing in common with
-the local computer: they are completely separate systems!
+::: challenge
 
+## What's in Your Home Directory?
 
+The system administrators may have configured your home directory with some
+helpful files, folders, and links (shortcuts) to space reserved for you on
+other filesystems. Take a look around and see what you can find.
+*Hint:* The shell commands `pwd` and `ls` may come in handy.
+Home directory contents vary from user to user. Please discuss any
+differences you spot with your neighbors.
 
-:::::::::::::::::::::::::
+:::: solution
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+## It's a Beautiful Day in the Neighborhood
 
-Most high-performance computing systems run the Linux operating system, which
-is built around the UNIX [Filesystem Hierarchy Standard][fshs]. Instead of
-having a separate root for each hard drive or storage medium, all files and
-devices are anchored to the "root" directory, which is `/`:
+The deepest layer should differ: `yourUsername` is uniquely yours.
+Are there differences in the path at higher levels?
+
+If both of you have empty directories, they will look identical. If you
+or your neighbor has used the system before, there may be differences. What
+are you working on?
+
+Use `pwd` to **p**rint the **w**orking **d**irectory path:
 
 ```bash
-{{ site.remote.prompt }} ls /
+[yourUsername@login1 ~] pwd
 ```
 
-```output
-bin   etc   lib64  proc  sbin     sys  var
-boot  {{ site.remote.homedir | replace: "/", "" }}  mnt    root  scratch  tmp  working
-dev   lib   opt    run   srv      usr
+You can run `ls` to **l**i**s**t the directory contents, though it's
+possible nothing will show up (if no files have been provided). To be sure,
+use the `-a` flag to show hidden files, too.
+
+```bash
+[yourUsername@login1 ~] ls -a
 ```
 
-The "{{ site.remote.homedir | replace: "/", "" }}" directory is the one where
-we generally want to keep all of our files. Other folders on a UNIX OS contain
-system files and change as you install new software or upgrade your OS.
+At a minimum, this will show the current directory as `.`, and the parent
+directory as `..`.
 
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-## Using HPC filesystems
-
-On HPC systems, you have a number of places where you can store your files.
-These differ in both the amount of space allocated and whether or not they
-are backed up.
-
-- **Home** -- often a *network filesystem*, data stored here is available
-  throughout the HPC system, and often backed up periodically. Files stored
-  here are typically slower to access, the data is actually stored on another
-  computer and is being transmitted and made available over the network!
-- **Scratch** -- typically faster than the networked Home directory, but not
-  usually backed up, and should not be used for long term storage.
-- **Work** -- sometimes provided as an alternative to Scratch space, Work is
-  a fast file system accessed over the network. Typically, this will have
-  higher performance than your home directory, but lower performance than
-  Scratch; it may not be backed up. It differs from Scratch space in that
-  files in a work file system are not automatically deleted for you: you must
-  manage the space yourself.
-  
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
+::::
+:::
 
 ## Nodes
 
 Individual computers that compose a cluster are typically called *nodes*
 (although you will also hear people call them *servers*, *computers* and
 *machines*). On a cluster, there are different types of nodes for different
-types of tasks. The node where you are right now is called the *login node*,
-*head node*, *landing pad*, or *submit node*. A login node serves as an access
+types of tasks. The node where you are right now is called the *head node*,
+*login node*, *landing pad*, or *submit node*. A login node serves as an access
 point to the cluster.
 
-As a gateway, the login node should not be used for time-consuming or
-resource-intensive tasks. You should be alert to this, and check with your
-site's operators or documentation for details of what is and isn't allowed. It
-is well suited for uploading and downloading files, setting up software, and
-running tests. Generally speaking, in these lessons, we will avoid running jobs
-on the login node.
+As a gateway, it is well suited for uploading and downloading files, setting up
+software, and running quick tests. Generally speaking, the login node should
+not be used for time-consuming or resource-intensive tasks. You should be alert
+to this, and check with your site's operators or documentation for details of
+what is and isn't allowed. In these lessons, we will avoid running jobs on the
+head node.
 
-Who else is logged in to the login node?
-
-```bash
-{{ site.remote.prompt }} who
-```
-
-This may show only your user ID, but there are likely several other people
-(including fellow learners) connected right now.
-
-:::::::::::::::::::::::::::::::::::::::::  callout
+::: callout
 
 ## Dedicated Transfer Nodes
 
@@ -147,26 +184,25 @@ documentation or its support team if such a transfer node is available. As a
 rule of thumb, consider all transfers of a volume larger than 500 MB to 1 GB
 as large. But these numbers change, e.g., depending on the network connection
 of yourself and of your cluster or other factors.
+:::
 
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-The real work on a cluster gets done by the *compute* (or *worker*) *nodes*.
-compute nodes come in many shapes and sizes, but generally are dedicated to long
+The real work on a cluster gets done by the *worker* (or *compute*) *nodes*.
+Worker nodes come in many shapes and sizes, but generally are dedicated to long
 or hard tasks that require a lot of computational resources.
 
-All interaction with the compute nodes is handled by a specialized piece of
+All interaction with the worker nodes is handled by a specialized piece of
 software called a scheduler (the scheduler used in this lesson is called
-{{ site.sched.name }}). We'll learn more about how to use the
+**Slurm**). We'll learn more about how to use the
 scheduler to submit jobs next, but for now, it can also tell us more
-information about the compute nodes.
+information about the worker nodes.
 
-For example, we can view all of the compute nodes by running the command
-`{{ site.sched.info }}`.
+For example, we can view all of the worker nodes by running the command
+`sinfo`.
 
 ```bash
-{{ site.remote.prompt }} {{ site.sched.info }}
+[yourUsername@login1 ~] sinfo
 ```
+
 
 ```output
 PARTITION          AVAIL  TIMELIMIT  NODES  STATE NODELIST
@@ -175,16 +211,13 @@ node                  up   infinite      2   idle node[1-2]
 smnode                up   infinite      2   idle smnode[1-2]
 ```
 
-A lot of the nodes are busy running work for other users: we are not alone
-here!
-
 There are also specialized machines used for managing disk storage, user
 authentication, and other infrastructure-related tasks. Although we do not
 typically logon to or interact with these machines directly, they enable a
 number of key features like ensuring our user account and files are available
 throughout the HPC system.
 
-## What's in a Node?
+## What\'s in a Node?
 
 All of the nodes in an HPC system have the same components as your own laptop
 or desktop: *CPUs* (sometimes also called *processors* or *cores*), *memory*
@@ -196,76 +229,71 @@ still there even if the computer has been restarted. While this storage can be
 local (a hard drive installed inside of it), it is more common for nodes to
 connect to a shared, remote fileserver or cluster of servers.
 
-![](/fig/node\_anatomy.png){max-width="40%" alt="Node anatomy"}
+![Node anatomy](fig/node_anatomy.png){max-width="20%" alt="Node anatomy" caption=""}
 
-:::::::::::::::::::::::::::::::::::::::  challenge
+::: challenge
 
 ## Explore Your Computer
 
 Try to find out the number of CPUs and amount of memory available on your
 personal computer.
-
 Note that, if you're logged in to the remote computer cluster, you need to
 log out first. To do so, type `Ctrl+d` or `exit`:
 
 ```bash
-{{ site.remote.prompt }} exit
-{{ site.local.prompt }}
+[yourUsername@login1 ~] exit
+[you@laptop:~]$
 ```
 
-:::::::::::::::  solution
-
-## Solution
+:::: solution
 
 There are several ways to do this. Most operating systems have a graphical
-system monitor, like the Windows Task Manager. More detailed information
-can be found on the command line:
+system monitor, like the Windows Task Manager. More detailed information can
+sometimes be found on the command line. For example, some of the commands used
+on a Linux system are:
 
-- Run system utilities
-  
-  ```bash
-  {{ site.local.prompt }} nproc --all
-  {{ site.local.prompt }} free -m
-  ```
-
-- Read from `/proc`
-  
-  ```bash
-  {{ site.local.prompt }} cat /proc/cpuinfo
-  {{ site.local.prompt }} cat /proc/meminfo
-  ```
-
-- Run system monitor
-  
-  ```bash
-  {{ site.local.prompt }} htop
-  ```
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-## Explore the Login Node
-
-Now compare the resources of your computer with those of the login node.
-
-:::::::::::::::  solution
-
-## Solution
+Run system utilities
 
 ```bash
-{{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
-{{ site.remote.prompt }} nproc --all
-{{ site.remote.prompt }} free -m
+[you@laptop:~]$ nproc --all
+[you@laptop:~]$ free -m
+```
+
+Read from `/proc`
+
+```bash
+[you@laptop:~]$ cat /proc/cpuinfo
+[you@laptop:~]$ cat /proc/meminfo
+```
+
+Use a system monitor
+
+```bash
+[you@laptop:~]$ htop
+```
+
+::::
+:::
+
+::: challenge
+
+## Explore the login node
+
+Now compare the resources of your computer with those of the head node.
+
+:::: solution
+
+```bash
+[you@laptop:~]$ ssh yourUsername@cluster.hpc-carpentry.org
+[yourUsername@login1 ~] nproc --all
+[yourUsername@login1 ~] free -m
 ```
 
 You can get more information about the processors using `lscpu`,
 and a lot of detail about the memory by reading the file `/proc/meminfo`:
 
 ```bash
-{{ site.remote.prompt }} less /proc/meminfo
+[yourUsername@login1 ~] less /proc/meminfo
 ```
 
 You can also explore the available filesystems using `df` to show **d**isk
@@ -274,106 +302,67 @@ i.e., GB instead of B. The **t**ype flag `-T` shows what kind of filesystem
 each resource is.
 
 ```bash
-{{ site.remote.prompt }} df -Th
+[yourUsername@login1 ~] df -Th
 ```
+::::
+:::
 
-::::::::::::::::::::::::::::::::::::::  discussion
+::: discussion
+The local filesystems (ext, tmp, xfs, zfs) will depend on whether you're
+on the same login node (or compute node, later on). Networked filesystems
+(beegfs, cifs, gpfs, nfs, pvfs) will be similar --- but may include
+yourUsername, depending on how it is [mounted](
+https://en.wikipedia.org/wiki/Mount_(computing)).
+:::
 
-## Different results from `df`
-
-- The local filesystems (ext, tmp, xfs, zfs) will depend on whether
-  you're on the same login node (or compute node, later on).
-- Networked filesystems (beegfs, cifs, gpfs, nfs, pvfs) will be similar
-  \-- but may include {{ site.remote.user }}, depending on how it
-  is [mounted][mount].
-  
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::::::::  callout
-
+::: callout
 ## Shared Filesystems
 
 This is an important point to remember: files saved on one node
 (computer) are often available everywhere on the cluster!
 
+:::
 
 
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::::::  challenge
+::: challenge
 
 ## Explore a Worker Node
 
-Finally, let's look at the resources available on the worker nodes where your
-jobs will actually run. Try running this command to see the name, CPUs and
-memory available on the worker nodes:
+Finally, let's look at the resources available on the worker nodes
+where your jobs will actually run. Try running this command to see
+the name, CPUs and memory available on one of the worker nodes:
 
 ```bash
-{{ site.remote.prompt }} sinfo -o "%n %c %m" | column -t
+[yourUsername@login1 ~] sinfo -o "%n %c %m" | column -t
 ```
+:::
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::  challenge
-
-## Compare Your Computer, the Login Node and the Compute Node
-
+::: discussion
+## Compare Your Computer, the login node and the compute node
 Compare your laptop's number of processors and memory with the numbers you
-see on the cluster login node and compute node. What implications do
-you think the differences might have on running your research work on the
-different systems and nodes?
+see on the cluster head node and worker node. Discuss the differences with
+your neighbor.
 
-:::::::::::::::  solution
+What implications do you think the differences might have on running your
+research work on the different systems and nodes?
+:::
 
-## Solution
-
-Compute nodes are usually built with processors that have *higher
-core-counts* than the login node or personal computers in order to support
-highly parallel tasks. Compute nodes usually also have substantially *more
-memory (RAM)* installed than a personal computer. More cores tends to help
-jobs that depend on some work that is easy to perform in *parallel*, and
-more, faster memory is key for large or *complex numerical tasks*.
-
-
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::::::::  callout
-
+::: callout
 ## Differences Between Nodes
 
 Many HPC clusters have a variety of nodes optimized for particular workloads.
 Some nodes may have larger amount of memory, or specialized resources such as
-Graphics Processing Units (GPUs or "video cards").
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
+Graphical Processing Units (GPUs).
+:::
 
 With all of this in mind, we will now cover how to talk to the cluster's
 scheduler, and use it to start running our scripts and programs!
 
-
-
-[fshs]: https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard
-[mount]: https://en.wikipedia.org/wiki/Mount_\(computing\)
-
-
-:::::::::::::::::::::::::::::::::::::::: keypoints
-
-- An HPC system is a set of networked machines.
-- HPC systems typically provide login nodes and a set of compute nodes.
-- The resources found on independent (worker) nodes can vary in volume and type (amount of RAM, processor architecture, availability of network mounted filesystems, etc.).
-- Files saved on shared storage are available on all nodes.
-- The login node is a shared machine: be considerate of other users.
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
+::: keypoints
+ - "An HPC system is a set of networked machines."
+ - "HPC systems typically provide login nodes and a set of worker nodes."
+ - "The resources found on independent (worker) nodes can vary in volume and
+   type (amount of RAM, processor architecture, availability of network mounted
+   filesystems, etc.)."
+ - "Files saved on one node are available on all nodes."
+:::

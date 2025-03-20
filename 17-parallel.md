@@ -4,6 +4,8 @@ teaching: 30
 exercises: 60
 ---
 
+
+
 ::::::::::::::::::::::::::::::::::::::: objectives
 
 - Install a Python package using `pip`
@@ -29,7 +31,7 @@ we have to improve the performance of computational tasks.
 If you disconnected, log back in to the cluster.
 
 ```bash
-{{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
+[you@laptop:~]$ ssh yourUsername@cluster.hpc-carpentry.org
 ```
 
 ## Install the Amdahl Program
@@ -40,8 +42,8 @@ Move into the extracted directory, then use the Package Installer for Python,
 or `pip`, to install it in your ("user") home directory:
 
 ```bash
-{{ site.remote.prompt }} cd amdahl
-{{ site.remote.prompt }} python3 -m pip install --user .
+[yourUsername@login1 ~] cd amdahl
+[yourUsername@login1 ~] python3 -m pip install --user .
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -73,20 +75,20 @@ retrieve the tarball from <https://github.com/mpi4py/mpi4py/tarball/master>
 then `rsync` it to the cluster, extract, and install:
 
 ```bash
-{{ site.local.prompt }} wget -O mpi4py.tar.gz https://github.com/mpi4py/mpi4py/releases/download/3.1.4/mpi4py-3.1.4.tar.gz
-{{ site.local.prompt }} scp mpi4py.tar.gz {{ site.remote.user }}@{{ site.remote.login }}:
+[you@laptop:~]$ wget -O mpi4py.tar.gz https://github.com/mpi4py/mpi4py/releases/download/3.1.4/mpi4py-3.1.4.tar.gz
+[you@laptop:~]$ scp mpi4py.tar.gz yourUsername@cluster.hpc-carpentry.org:
 # or
-{{ site.local.prompt }} rsync -avP mpi4py.tar.gz {{ site.remote.user }}@{{ site.remote.login }}:
+[you@laptop:~]$ rsync -avP mpi4py.tar.gz yourUsername@cluster.hpc-carpentry.org:
 ```
 
 ```bash
-{{ site.local.prompt }} ssh {{ site.remote.user }}@{{ site.remote.login }}
-{{ site.remote.prompt }} tar -xvzf mpi4py.tar.gz  # extract the archive
-{{ site.remote.prompt }} mv mpi4py* mpi4py        # rename the directory
-{{ site.remote.prompt }} cd mpi4py
-{{ site.remote.prompt }} python3 -m pip install --user .
-{{ site.remote.prompt }} cd ../amdahl
-{{ site.remote.prompt }} python3 -m pip install --user .
+[you@laptop:~]$ ssh yourUsername@cluster.hpc-carpentry.org
+[yourUsername@login1 ~] tar -xvzf mpi4py.tar.gz  # extract the archive
+[yourUsername@login1 ~] mv mpi4py* mpi4py        # rename the directory
+[yourUsername@login1 ~] cd mpi4py
+[yourUsername@login1 ~] python3 -m pip install --user .
+[yourUsername@login1 ~] cd ../amdahl
+[yourUsername@login1 ~] python3 -m pip install --user .
 ```
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -107,7 +109,7 @@ To check whether this warning is a problem, use `which` to search for the
 `amdahl` program:
 
 ```bash
-{{ site.remote.prompt }} which amdahl
+[yourUsername@login1 ~] which amdahl
 ```
 
 If the command returns no output, displaying a new prompt, it means the file
@@ -117,15 +119,15 @@ Edit your shell configuration file as follows, then log off the cluster and
 back on again so it takes effect.
 
 ```bash
-{{ site.remote.prompt }} nano ~/.bashrc
-{{ site.remote.prompt }} tail ~/.bashrc
+[yourUsername@login1 ~] nano ~/.bashrc
+[yourUsername@login1 ~] tail ~/.bashrc
 ```
 
 ```output
 export PATH=${PATH}:${HOME}/.local/bin
 ```
 
-After logging back in to {{ site.remote.login }}, `which` should be able to
+After logging back in to cluster.hpc-carpentry.org, `which` should be able to
 find `amdahl` without difficulties.
 If you had to load a Python module, load it again.
 
@@ -137,7 +139,7 @@ If you had to load a Python module, load it again.
 Many command-line programs include a "help" message. Try it with `amdahl`:
 
 ```bash
-{{ site.remote.prompt }} amdahl --help
+[yourUsername@login1 ~] amdahl --help
 ```
 
 ```output
@@ -163,33 +165,33 @@ tell us the important flags we might want to use when launching it.
 Create a submission file, requesting one task on a single node, then launch it.
 
 ```bash
-{{ site.remote.prompt }} nano serial-job.sh
-{{ site.remote.prompt }} cat serial-job.sh
+[yourUsername@login1 ~] nano serial-job.sh
+[yourUsername@login1 ~] cat serial-job.sh
 ```
 
 ```bash
-{{ site.remote.bash_shebang }}
-{{ site.sched.comment }} {{ site.sched.flag.name }} solo-job
-{{ site.sched.comment }} {{ site.sched.flag.queue }} {{ site.sched.queue.testing }}
-{{ site.sched.comment }} -N 1
-{{ site.sched.comment }} -n 1
+#!/bin/bash
+#SBATCH -J solo-job
+#SBATCH -p cpubase_bycore_b1
+#SBATCH -N 1
+#SBATCH -n 1
 
 # Load the computing environment we need
-module load {{ site.remote.module_python3 }}
+module load Python
 
 # Execute the task
 amdahl
 ```
 
 ```bash
-{{ site.remote.prompt }} {{ site.sched.submit.name }} serial-job.sh
+[yourUsername@login1 ~] sbatch serial-job.sh
 ```
 
-As before, use the {{ site.sched.name }} status commands to check whether your job
+As before, use the Slurm status commands to check whether your job
 is running and when it ends:
 
 ```bash
-{{ site.remote.prompt }} {{ site.sched.status }} {{ site.sched.flag.user }}
+[yourUsername@login1 ~] squeue -u yourUsername
 ```
 
 Use `ls` to locate the output file. The `-t` flag sorts in
@@ -203,7 +205,7 @@ The cluster output should be written to a file in the folder you launched the
 job from. For example,
 
 ```bash
-{{ site.remote.prompt }} ls -t
+[yourUsername@login1 ~] ls -t
 ```
 
 ```output
@@ -211,15 +213,15 @@ slurm-347087.out  serial-job.sh  amdahl  README.md  LICENSE.txt
 ```
 
 ```bash
-{{ site.remote.prompt }} cat slurm-347087.out
+[yourUsername@login1 ~] cat slurm-347087.out
 ```
 
 ```output
 Doing 30.000 seconds of 'work' on 1 processor,
 which should take 30.000 seconds with 0.850 parallel proportion of the workload.
 
-  Hello, World! I am process 0 of 1 on {{ site.remote.node }}. I will do all the serial 'work' for 4.500 seconds.
-  Hello, World! I am process 0 of 1 on {{ site.remote.node }}. I will do parallel 'work' for 25.500 seconds.
+  Hello, World! I am process 0 of 1 on smnode1. I will do all the serial 'work' for 4.500 seconds.
+  Hello, World! I am process 0 of 1 on smnode1. I will do parallel 'work' for 25.500 seconds.
 
 Total execution time (according to rank 0): 30.033 seconds
 ```
@@ -278,27 +280,26 @@ In the context of a queuing system, however, it is frequently the case that
 MPI run-time will obtain the necessary parameters from the queuing system,
 by examining the environment variables set when the job is launched.
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Let's modify the job script to request more cores and use the MPI run-time.
 
-```bash, bash
-{{ site.remote.prompt }} cp serial-job.sh parallel-job.sh
-{{ site.remote.prompt }} nano parallel-job.sh
-{{ site.remote.prompt }} cat parallel-job.sh
+```bash
+[yourUsername@login1 ~] cp serial-job.sh parallel-job.sh
+[yourUsername@login1 ~] nano parallel-job.sh
+[yourUsername@login1 ~] cat parallel-job.sh
 ```
 
 ```bash
-{{ site.remote.bash_shebang }}
-{{ site.sched.comment }} {{ site.sched.flag.name }} parallel-job
-{{ site.sched.comment }} {{ site.sched.flag.queue }} {{ site.sched.queue.testing }}
-{{ site.sched.comment }} -N 1
-{{ site.sched.comment }} -n 4
+#!/bin/bash
+#SBATCH -J parallel-job
+#SBATCH -p cpubase_bycore_b1
+#SBATCH -N 1
+#SBATCH -n 4
 
 # Load the computing environment we need
 # (mpi4py and numpy are in SciPy-bundle)
-module load {{ site.remote.module_python3 }}
+module load Python
 module load SciPy-bundle
 
 # Execute the task
@@ -310,13 +311,13 @@ from how we submitted the serial job: all the parallel settings are in the
 batch file rather than the command line.
 
 ```bash
-{{ site.remote.prompt }} {{ site.sched.submit.name }} parallel-job.sh
+[yourUsername@login1 ~] sbatch parallel-job.sh
 ```
 
 As before, use the status commands to check when your job runs.
 
 ```bash
-{{ site.remote.prompt }} ls -t
+[yourUsername@login1 ~] ls -t
 ```
 
 ```output
@@ -324,18 +325,18 @@ slurm-347178.out  parallel-job.sh  slurm-347087.out  serial-job.sh  amdahl  READ
 ```
 
 ```bash
-{{ site.remote.prompt }} cat slurm-347178.out
+[yourUsername@login1 ~] cat slurm-347178.out
 ```
 
 ```output
 Doing 30.000 seconds of 'work' on 4 processors,
 which should take 10.875 seconds with 0.850 parallel proportion of the workload.
 
-  Hello, World! I am process 0 of 4 on {{ site.remote.node }}. I will do all the serial 'work' for 4.500 seconds.
-  Hello, World! I am process 2 of 4 on {{ site.remote.node }}. I will do parallel 'work' for 6.375 seconds.
-  Hello, World! I am process 1 of 4 on {{ site.remote.node }}. I will do parallel 'work' for 6.375 seconds.
-  Hello, World! I am process 3 of 4 on {{ site.remote.node }}. I will do parallel 'work' for 6.375 seconds.
-  Hello, World! I am process 0 of 4 on {{ site.remote.node }}. I will do parallel 'work' for 6.375 seconds.
+  Hello, World! I am process 0 of 4 on smnode1. I will do all the serial 'work' for 4.500 seconds.
+  Hello, World! I am process 2 of 4 on smnode1. I will do parallel 'work' for 6.375 seconds.
+  Hello, World! I am process 1 of 4 on smnode1. I will do parallel 'work' for 6.375 seconds.
+  Hello, World! I am process 3 of 4 on smnode1. I will do parallel 'work' for 6.375 seconds.
+  Hello, World! I am process 0 of 4 on smnode1. I will do parallel 'work' for 6.375 seconds.
 
 Total execution time (according to rank 0): 10.888 seconds
 ```
@@ -403,20 +404,20 @@ Let's run one more job, so we can see how close to a straight line our `amdahl`
 code gets.
 
 ```bash
-{{ site.remote.prompt }} nano parallel-job.sh
-{{ site.remote.prompt }} cat parallel-job.sh
+[yourUsername@login1 ~] nano parallel-job.sh
+[yourUsername@login1 ~] cat parallel-job.sh
 ```
 
 ```bash
-{{ site.remote.bash_shebang }}
-{{ site.sched.comment }} {{ site.sched.flag.name }} parallel-job
-{{ site.sched.comment }} {{ site.sched.flag.queue }} {{ site.sched.queue.testing }}
-{{ site.sched.comment }} -N 1
-{{ site.sched.comment }} -n 8
+#!/bin/bash
+#SBATCH -J parallel-job
+#SBATCH -p cpubase_bycore_b1
+#SBATCH -N 1
+#SBATCH -n 8
 
 # Load the computing environment we need
 # (mpi4py and numpy are in SciPy-bundle)
-module load {{ site.remote.module_python3 }}
+module load Python
 module load SciPy-bundle
 
 # Execute the task
@@ -428,13 +429,13 @@ from how we submitted the serial job: all the parallel settings are in the
 batch file rather than the command line.
 
 ```bash
-{{ site.remote.prompt }} {{ site.sched.submit.name }} parallel-job.sh
+[yourUsername@login1 ~] sbatch parallel-job.sh
 ```
 
 As before, use the status commands to check when your job runs.
 
 ```bash
-{{ site.remote.prompt }} ls -t
+[yourUsername@login1 ~] ls -t
 ```
 
 ```output
@@ -442,21 +443,21 @@ slurm-347271.out  parallel-job.sh  slurm-347178.out  slurm-347087.out  serial-jo
 ```
 
 ```bash
-{{ site.remote.prompt }} cat slurm-347178.out
+[yourUsername@login1 ~] cat slurm-347178.out
 ```
 
 ```output
 which should take 7.688 seconds with 0.850 parallel proportion of the workload.
 
-  Hello, World! I am process 4 of 8 on {{ site.remote.node }}. I will do parallel 'work' for 3.188 seconds.
-  Hello, World! I am process 0 of 8 on {{ site.remote.node }}. I will do all the serial 'work' for 4.500 seconds.
-  Hello, World! I am process 2 of 8 on {{ site.remote.node }}. I will do parallel 'work' for 3.188 seconds.
-  Hello, World! I am process 1 of 8 on {{ site.remote.node }}. I will do parallel 'work' for 3.188 seconds.
-  Hello, World! I am process 3 of 8 on {{ site.remote.node }}. I will do parallel 'work' for 3.188 seconds.
-  Hello, World! I am process 5 of 8 on {{ site.remote.node }}. I will do parallel 'work' for 3.188 seconds.
-  Hello, World! I am process 6 of 8 on {{ site.remote.node }}. I will do parallel 'work' for 3.188 seconds.
-  Hello, World! I am process 7 of 8 on {{ site.remote.node }}. I will do parallel 'work' for 3.188 seconds.
-  Hello, World! I am process 0 of 8 on {{ site.remote.node }}. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 4 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 0 of 8 on smnode1. I will do all the serial 'work' for 4.500 seconds.
+  Hello, World! I am process 2 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 1 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 3 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 5 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 6 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 7 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 0 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
 
 Total execution time (according to rank 0): 7.697 seconds
 ```
@@ -473,28 +474,32 @@ With 8 workers, this is not the case: since the parallel workers take less
 time than the serial work, it is hard to say which process will write its
 output first, except that it will *not* be process 0!
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Now, let's summarize the amount of time it took each job to run:
 
-| Number of CPUs | Runtime (sec) | 
+| Number of CPUs | Runtime (sec) |
 | -------------- | ------------- |
-| 1              | 30\.033        | 
-| 4              | 10\.888        | 
-| 8              | 7\.697         | 
+| 1              | 30\.033        |
+| 4              | 10\.888        |
+| 8              | 7\.697         |
 
-Then, use the first row to compute speedups *S*, using Python as a command-line calculator:
+Then, use the first row to compute speedups $S$, using Python as a command-line
+calculator and the formula
+
+$$
+S(t_{n}) = \frac{t_{1}}{t_{n}}
+$$
 
 ```bash
-{{ site.remote.prompt }} for n in 30.033 10.888 7.697; do python3 -c "print(30.033 / $n)"; done
+[yourUsername@login1 ~] for n in 30.033 10.888 7.697; do python3 -c "print(30.033 / $n)"; done
 ```
 
-| Number of CPUs | Speedup       | Ideal | 
+| Number of CPUs | Speedup       | Ideal |
 | -------------- | ------------- | ----- |
-| 1              | 1\.0           | 1     | 
-| 4              | 2\.75          | 4     | 
-| 8              | 3\.90          | 8     | 
+| 1              | 1\.0           | 1     |
+| 4              | 2\.75          | 4     |
+| 8              | 3\.90          | 8     |
 
 The job output files have been telling us that this program is performing 85%
 of its work in parallel, leaving 15% to run in serial. This seems reasonably
@@ -518,7 +523,6 @@ thousands of CPUs into solving a single problem. To learn more about
 parallelization, see the [parallel novice lesson][parallel-novice] lesson.
 
 
-
 [amdahl]: https://en.wikipedia.org/wiki/Amdahl\'s_law
 [parallel-novice]: https://www.hpc-carpentry.org/hpc-parallel-novice/
 
@@ -530,5 +534,3 @@ parallelization, see the [parallel novice lesson][parallel-novice] lesson.
 - Performance improvements from parallel execution do not scale linearly.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

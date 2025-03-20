@@ -4,6 +4,8 @@ teaching: 10
 exercises: 5
 ---
 
+
+
 ::::::::::::::::::::::::::::::::::::::: objectives
 
 - Understand how variables are implemented in the shell
@@ -27,8 +29,7 @@ exercises: 5
 
 This episode has been remixed from the
 [Shell Extras episode on Shell Variables](https://github.com/carpentries-incubator/shell-extras/blob/gh-pages/_episodes/08-environment-variables.md)
-and the [HPC Shell episode on scripts](https://github.com/hpc-carpentry/hpc-shell/blob/gh-pages/_episodes/05-scripts.md)
-
+and the [HPC Shell episode on scripts](https://github.com/hpc-carpentry/hpc-shell/blob/gh-pages/_episodes/05-scripts.md).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -191,7 +192,7 @@ run**.
 
 ## Job environment variables
 
-When {{ site.sched.name }} runs a job, it sets a number of environment
+When `Slurm` runs a job, it sets a number of environment
 variables for the job. One of these will let us check what directory our job
 script was submitted from. The `SLURM_SUBMIT_DIR` variable is set to the
 directory from which our job was submitted. Using the `SLURM_SUBMIT_DIR`
@@ -203,12 +204,12 @@ job was submitted.
 ## Solution
 
 ```bash
-{{ site.remote.prompt }} nano example-job.sh
-{{ site.remote.prompt }} cat example-job.sh
+[yourUsername@login1 ~] nano example-job.sh
+[yourUsername@login1 ~] cat example-job.sh
 ```
 
 ```output
-{{ site.remote.bash_shebang }}
+#!/bin/bash
 #SBATCH -t 00:00:30
 
 echo -n "This script is running on "
@@ -285,8 +286,6 @@ runtime environment to make that possible without us needing to do a lot of
 bookkeeping on what the value of `PATH` (and other important environment
 variables) is or should be.
 
-
-
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Shell variables are by default treated as strings
@@ -295,5 +294,3 @@ variables) is or should be.
 - The `PATH` variable defines the shell's search path
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

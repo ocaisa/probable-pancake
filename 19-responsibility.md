@@ -4,6 +4,8 @@ teaching: 15
 exercises: 5
 ---
 
+
+
 ::::::::::::::::::::::::::::::::::::::: objectives
 
 - Describe how the actions of a single user can affect the experience of others on a shared system.
@@ -262,30 +264,17 @@ data.
 
 Say you have a "data" folder containing 10,000 or so files, a healthy mix of
 small and large ASCII and binary data. Which of the following would be the
-best way to transfer them to {{ site.remote.name }}?
+best way to transfer them to HPC Carpentry's Cloud Cluster?
 
-1. 
-  ```bash
-  {{ site.local.prompt }} scp -r data {{ site.remote.user }}@{{ site.remote.login }}:~/
-  ```
-2. 
-  ```bash
-  {{ site.local.prompt }} rsync -ra data {{ site.remote.user }}@{{ site.remote.login }}:~/
-  ```
-3. 
-  ```bash
-  {{ site.local.prompt }} rsync -raz data {{ site.remote.user }}@{{ site.remote.login }}:~/
-  ```
-4. 
-  ```bash
-  {{ site.local.prompt }} tar -cvf data.tar data
-  {{ site.local.prompt }} rsync -raz data.tar {{ site.remote.user }}@{{ site.remote.login }}:~/
-  ```
-5. 
-  ```bash
-  {{ site.local.prompt }} tar -cvzf data.tar.gz data
-  {{ site.local.prompt }} rsync -ra data.tar.gz {{ site.remote.user }}@{{ site.remote.login }}:~/
-  ```
+1. `scp -r data yourUsername@cluster.hpc-carpentry.org:~/`
+2. `rsync -ra data yourUsername@cluster.hpc-carpentry.org:~/`
+3. `rsync -raz data yourUsername@cluster.hpc-carpentry.org:~/`
+4. `tar -cvf data.tar data;`
+
+   `rsync -raz data.tar yourUsername@cluster.hpc-carpentry.org:~/`
+5. `tar -cvzf data.tar.gz data;`
+
+   `rsync -ra data.tar.gz yourUsername@cluster.hpc-carpentry.org:~/`
 
 :::::::::::::::  solution
 
@@ -306,8 +295,6 @@ best way to transfer them to {{ site.remote.name }}?
   transfer it. This may perform similarly to #4, but in most cases (for
   large datasets), it's the best combination of high throughput and low
   latency (making the most of your time and network connection).
-  
-  
 
 :::::::::::::::::::::::::
 

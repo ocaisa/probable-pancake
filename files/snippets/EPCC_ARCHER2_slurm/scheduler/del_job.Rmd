@@ -1,0 +1,3 @@
+```bash
+`r config$remote$prompt` scancel 38759
+```

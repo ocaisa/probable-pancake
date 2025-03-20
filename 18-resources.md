@@ -4,10 +4,13 @@ teaching: 10
 exercises: 20
 ---
 
+
+
 ::::::::::::::::::::::::::::::::::::::: objectives
 
 - Look up job statistics.
-- Make more accurate resource requests in job scripts based on data describing past performance.
+- Make more accurate resource requests in job scripts based on data
+  describing past performance.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -40,12 +43,11 @@ document sent along when you register for an account. Take a look at these
 resources, and search for the software you plan to use: somebody might have
 written up guidance for getting the most out of it.
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 A convenient way of figuring out the resources required for a job to run
 successfully is to submit a test job, and then ask the scheduler about its
-impact using `{{ site.sched.hist }}`. You can use this knowledge to set up the
+impact using `sacct -u yourUsername`. You can use this knowledge to set up the
 next job with a closer estimate of its load on the system. A good general rule
 is to ask the scheduler for 20% to 30% more time and memory than you expect the
 job to need. This ensures that minor fluctuations in run time or memory use
@@ -58,10 +60,10 @@ finish and free up the resources needed to match what you asked for.
 
 Since we already submitted `amdahl` to run on the cluster, we can query the
 scheduler to see how long our job took and what resources were used. We will
-use `{{ site.sched.hist }}` to get statistics about `parallel-job.sh`.
+use `sacct -u yourUsername` to get statistics about `parallel-job.sh`.
 
 ```bash
-{{ site.remote.prompt }} {{ site.sched.hist }}
+[yourUsername@login1 ~] sacct -u yourUsername
 ```
 
 ```output
@@ -84,7 +86,7 @@ To get info about a specific job (for example, 347087), we change command
 slightly.
 
 ```bash
-{{ site.remote.prompt }} {{ site.sched.hist }} {{ site.sched.flag.histdetail }} 347087
+[yourUsername@login1 ~] sacct -u yourUsername -l -j 347087
 ```
 
 It will show a lot of info; in fact, every single piece of info collected on
@@ -93,7 +95,7 @@ information to `less` to make it easier to view (use the left and right arrow
 keys to scroll through fields).
 
 ```bash
-{{ site.remote.prompt }} {{ site.sched.hist }} {{ site.sched.flag.histdetail }} 347087 | less -S
+[yourUsername@login1 ~] sacct -u yourUsername -l -j 347087 | less -S
 ```
 
 ::::::::::::::::::::::::::::::::::::::  discussion
@@ -129,17 +131,17 @@ get your job dispatched earlier.
 Edit `parallel_job.sh` to set a better time estimate. How close can
 you get?
 
-Hint: use `{{ site.sched.flag.time }}`.
+Hint: use `-t`.
 
 :::::::::::::::  solution
 
 ## Solution
 
-The following line tells {{ site.sched.name }} that our job should
+The following line tells Slurm that our job should
 finish within 2 minutes:
 
 ```bash
-{{ site.sched.comment }} {{ site.sched.flag.time }}{% if site.sched.name == "Slurm" %} {% else %}={% endif %}00:02:00
+#SBATCH -t 00:02:00
 ```
 
 :::::::::::::::::::::::::
@@ -147,11 +149,9 @@ finish within 2 minutes:
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Accurate job scripts help the queuing system efficiently allocate shared resources.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
 

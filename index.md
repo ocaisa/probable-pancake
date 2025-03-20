@@ -2,8 +2,6 @@
 site: sandpaper::sandpaper_site
 ---
 
-{% include gh\_variables.html %}
-
 This workshop is an introduction to using high-performance computing systems
 effectively. We can't cover every case or give an exhaustive course on parallel
 programming in just two days' teaching time. Instead, this workshop is intended
@@ -18,7 +16,6 @@ Command line experience is necessary for this lesson. We recommend the
 participants to go through
 [shell-novice](https://swcarpentry.github.io/shell-novice/), if new to the
 command line (also known as terminal or shell).
-
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -35,10 +32,8 @@ By the end of this workshop, students will know how to:
 
 ## Getting Started
 
-To get started, follow the directions in the "[Setup](
-{{ page.root }}/setup.html)" tab to download data to your computer and follow
-any installation instructions.
-
+To get started, please follow the "[Setup Instructions](../learners/setup.md)
+to ensure you have a terminal and SSH application.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -52,9 +47,4 @@ welcome.
 If you are teaching this lesson in a workshop, please see the
 [Instructor notes](instructors/instructor-notes.md).
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-
-
