@@ -66,7 +66,7 @@ contact: 'team@carpentries.org'
 # Order of episodes in your lesson
 episodes: 
 - 10-hpc-intro.md
-- 11-connecting.md
+- 11-connecting.Rmd
 - 12-cluster.md
 - 12-epcc-cluster.Rmd
 - 13-scheduler.md

@@ -1,4 +1,6 @@
-# Site Structure and Maintenance
+---
+title: "Site Structure and Maintenance"
+---
 
 This site depends strongly on GitHub infrastructure, and a number of
 operational decisions have been made during the development process

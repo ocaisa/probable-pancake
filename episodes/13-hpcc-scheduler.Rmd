@@ -80,7 +80,7 @@ manner. Our shell script will have three parts:
   name of the machine the script is run on.
 
 ```bash
-`r config$remote$prompt`nano example-job.sh
+`r config$remote$prompt` nano example-job.sh
 ```
 
 ```output
@@ -101,7 +101,7 @@ Run the script. Does it execute on the cluster or just our login node?
 ## Solution
 
 ```bash
-`r config$remote$prompt`bash example-job.sh
+`r config$remote$prompt` bash example-job.sh
 ```
 
 ```output
