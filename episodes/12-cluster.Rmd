@@ -1,24 +1,23 @@
 ---
-title: "EPCC version - Working on a remote HPC system"
+title: "Working on a remote HPC system"
 teaching: 25
 exercises: 10
 ---
 
-```{r load_config, include=FALSE}
-library(yaml)
-config <- yaml.load_file("epcc_config.yaml")
-snippets <- paste('files/snippets/', config$snippets, sep='')
+```{r, echo=FALSE}
+# Source the external configuration script
+source("load_config.R")
 ```
 
 ::: questions
- - "What is an HPC system?"
- - "How does an HPC system work?"
- - "How do I log on to a remote HPC system?"
+- "What is an HPC system?"
+- "How does an HPC system work?"
+- "How do I log on to a remote HPC system?"
 :::
 
 ::: objectives
- - "Connect to a remote HPC system."
- - "Understand the general HPC system architecture."
+- "Connect to a remote HPC system."
+- "Understand the general HPC system architecture."
 :::
 
 ## What Is an HPC System?
@@ -114,7 +113,7 @@ may also notice that the current hostname is also part of our prompt!)
 `r config$remote$prompt` hostname
 ```
 
-```bash
+```output
 `r config$remote$host`
 ```
 
@@ -129,7 +128,7 @@ other filesystems. Take a look around and see what you can find.
 Home directory contents vary from user to user. Please discuss any
 differences you spot with your neighbors.
 
-::: solution
+:::: solution
 
 ## It's a Beautiful Day in the Neighborhood
 
@@ -139,7 +138,6 @@ Are there differences in the path at higher levels?
 If both of you have empty directories, they will look identical. If you
 or your neighbor has used the system before, there may be differences. What
 are you working on?
-
 
 Use `pwd` to **p**rint the **w**orking **d**irectory path:
 
@@ -158,7 +156,7 @@ use the `-a` flag to show hidden files, too.
 At a minimum, this will show the current directory as `.`, and the parent
 directory as `..`.
 
-:::
+::::
 :::
 
 ## Nodes
@@ -178,7 +176,9 @@ what is and isn't allowed. In these lessons, we will avoid running jobs on the
 head node.
 
 ::: callout
+
 ## Dedicated Transfer Nodes
+
 If you want to transfer larger amounts of data to or from the cluster, some
 systems offer dedicated nodes for data transfers only. The motivation for
 this lies in the fact that larger data transfers should not obstruct
@@ -206,7 +206,7 @@ For example, we can view all of the worker nodes by running the command
 `r config$remote$prompt` `r config$sched$info`
 ```
 
-```{r, child=paste(snippets, '/cluster/queue-info.snip', sep=''), eval=TRUE}
+```{r, child=paste(snippets, '/cluster/queue-info.Rmd', sep='')}
 ```
 
 There are also specialized machines used for managing disk storage, user
@@ -232,6 +232,7 @@ connect to a shared, remote fileserver or cluster of servers.
 ::: challenge
 
 ## Explore Your Computer
+
 Try to find out the number of CPUs and amount of memory available on your
 personal computer.
 Note that, if you're logged in to the remote computer cluster, you need to
@@ -242,40 +243,43 @@ log out first. To do so, type `Ctrl+d` or `exit`:
 `r config$local$prompt`
 ```
 
-::: solution
+:::: solution
 
 There are several ways to do this. Most operating systems have a graphical
-system monitor, like the Windows Task Manager. More detailed information
-can sometimes be found on the command line. For example, some of the commands used on 
-a Linux system are:
+system monitor, like the Windows Task Manager. More detailed information can
+sometimes be found on the command line. For example, some of the commands used
+on a Linux system are:
 
 Run system utilities
+
 ```bash
 `r config$local$prompt` nproc --all
 `r config$local$prompt` free -m
 ```
 
 Read from `/proc`
+
 ```bash
 `r config$local$prompt` cat /proc/cpuinfo
 `r config$local$prompt` cat /proc/meminfo
 ```
 
-Run system monitor
+Use a system monitor
+
 ```bash
 `r config$local$prompt` htop
 ```
 
+::::
 :::
-:::
-
 
 ::: challenge
+
 ## Explore the login node
 
 Now compare the resources of your computer with those of the head node.
 
-::: solution
+:::: solution
 
 ```bash
 `r config$local$prompt` ssh `r config$remote$user`@`r config$remote$login`
@@ -298,7 +302,7 @@ each resource is.
 ```bash
 `r config$remote$prompt` df -Th
 ```
-:::
+::::
 :::
 
 ::: discussion

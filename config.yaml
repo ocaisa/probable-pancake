@@ -67,8 +67,7 @@ contact: 'team@carpentries.org'
 episodes: 
 - 10-hpc-intro.md
 - 11-connecting.Rmd
-- 12-cluster.md
-- 12-epcc-cluster.Rmd
+- 12-cluster.Rmd
 - 13-scheduler.md
 - 13-hpcc-scheduler.Rmd
 - 13-epcc-scheduler.Rmd
