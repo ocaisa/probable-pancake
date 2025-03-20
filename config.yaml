@@ -74,7 +74,7 @@ episodes:
   - 16-transferring-files.Rmd
   - 17-parallel.Rmd
   - 18-resources.Rmd
-  - 19-responsibility.md
+  - 19-responsibility.Rmd
 
 # Information for Learners
 learners:
