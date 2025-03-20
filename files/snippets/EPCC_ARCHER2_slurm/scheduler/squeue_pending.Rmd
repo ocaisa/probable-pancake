@@ -1,0 +1,4 @@
+```output
+ JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+119867  standard    myjob   userid PD       0:00      1 (Resources) 
+```
