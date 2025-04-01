@@ -1,0 +1,11 @@
+```bash
+#!/bin/bash
+
+#SBATCH --partition=standard
+#SBATCH --qos=short
+#SBATCH --time=00:00:30
+
+echo 'This script is running on:'
+hostname
+sleep 120
+```

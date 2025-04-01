@@ -1,0 +1,47 @@
+::: challenge
+## Benchmarking the parallel performance
+Modify your job script to run on multiple cores and evaluate the performance of `pi-mpi.py`
+on a variety of different core counts and use multiple runs to complete a table like the one
+below.
+If you examine the log file you will see that it contains two timings: the total time taken by the
+entire program and the time taken solely by the calculation. The calculation of Pi from the Monte-Carlo counts
+is not parallelised so this is a serial overhead, performed by a single processor.
+The calculation part is, in theory, perfectly parallel (each processor operates on independent sets of unique random numbers
+) so this should get faster on more cores. The Calculation core seconds is the
+*calculation time* multiplied by the number of cores.
+
+| Cores      | Overall run time (s) | Calculation time (s) | Calculation core seconds |
+|------------|----------------------|----------------------|--------------------------|
+| 1 (serial) |                      |                      |                          |
+| 2          |                      |                      |                          |
+| 4          |                      |                      |                          |                    
+| 8          |                      |                      |                          | 
+| 16         |                      |                      |                          | 
+| 32         |                      |                      |                          | 
+| 64         |                      |                      |                          |              
+| 128        |                      |                      |                          | 
+| 256        |                      |                      |                          |
+
+Look at your results – do they make sense? Given the structure of the code, you would
+expect the performance of the calculation to increase
+linearly with the number of cores: this would give a roughly constant figure for the Calculation core
+seconds. Is this what you observe?
+
+::: solution
+
+The table below shows example timings for runs on `r config$remote$name`
+
+| Cores      | Overall run time (s) | Calculation time (s) |       Calculation core seconds |
+|-----------:|---------------------:|---------------------:|-------------------------------:|
+|          1 |                3.931 |                3.854 |                          3.854 |
+|          2 |                2.002 |                1.930 |                          3.859 |
+|          4 |                1.048 |                0.972 |                          3.888 |
+|          8 |                0.572 |                0.495 |                          3.958 |
+|         16 |                0.613 |                0.536 |                          8.574 |
+|         32 |                0.360 |                0.278 |                          8.880 |
+|         64 |                0.249 |                0.163 |                         10.400 |
+|        128 |                0.170 |                0.083 |                         10.624 |
+|        256 |                0.187 |                0.135 |                         34.560 |
+
+:::
+:::

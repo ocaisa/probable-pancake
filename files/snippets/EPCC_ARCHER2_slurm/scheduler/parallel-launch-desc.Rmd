@@ -1,0 +1,15 @@
+```bash
+srun python pi-mpi.py 10000000
+```
+
+And this corresponds to the four required items we described above:
+
+1. Parallel launch program: in this case the parallel launch program
+   is called `srun`; the additional argument controls which cores are
+   used.
+2. Number of parallel processes per node: in this case this is 16,
+   and is specified by the option `--ntasks-per-node=16` option.
+3. Total number of parallel processes: in this case this is also 16,
+   because we specified 1 node and 16 parallel processes per node.
+4. Our program and arguments: in this case this is 
+   `python pi-mpi.py 10000000`.

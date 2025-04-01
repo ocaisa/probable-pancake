@@ -1,0 +1,25 @@
+Creating a file called `submit-pi-mpi.slurm`:
+
+```bash
+#!/bin/bash
+#SBATCH --partition=`r config$sched$partition`
+#SBATCH --qos=`r config$sched$qos`
+#SBATCH --reservation=`r config$sched$reservation`
+
+#SBATCH --job-name=pi-mpi
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=1
+#SBATCH --time=00:15:00
+srun python pi-mpi.py 10000000
+```
+
+Run application using a single process (i.e. in serial) with a blocking `srun` command:
+```bash
+srun python pi-mpi.py 10000000
+```
+
+Submit with to the batch queue with:
+
+```bash
+`r config$sched$prompt_work` `r config$sched$submit.name` submit-pi-mpi.slurm
+```

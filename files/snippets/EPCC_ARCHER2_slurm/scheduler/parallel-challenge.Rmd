@@ -1,0 +1,27 @@
+::: challenge
+
+## Running parallel jobs
+
+Modify the pi-mpi-run script that you used above to use all 128 cores on
+one node.  Check the output to confirm that it used the correct number
+of cores in parallel for the calculation.
+
+:::: solution
+Here is a modified script
+
+```bash
+#!/bin/bash
+
+#SBATCH --partition=`r config$sched$partition`
+#SBATCH --qos=`r config$sched$qos`
+#SBATCH --reservation=`r config$sched$reservation`
+#SBATCH --time=00:00:30
+
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=128
+
+module load cray-python
+srun python pi-mpi.py 10000000
+```
+::::
+:::

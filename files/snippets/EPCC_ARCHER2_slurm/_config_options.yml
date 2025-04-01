@@ -1,0 +1,63 @@
+#------------------------------------------------------------
+# ComputeCanada: Graham + Slurm
+#------------------------------------------------------------
+
+# Cluster host and scheduler options: the defaults come from
+# Graham at Compute Canada, running Slurm. Other options can
+# be found in the library of snippets,
+# `_includes/snippets_library`. To use one, replace options
+# below with those in `_config_options.yml` from the
+# library. E.g, to customise for Cirrus at EPCC, running
+# PBS, we could replace the options below with those from
+# 
+# _includes/snippets_library/EPCC_Cirrus_pbs/_config_options.yml
+# 
+# If your cluster is not represented in the library, please
+# copy an existing folder, rename it, and customize for your
+# installation. Remember to keep the leading slash on the
+# `snippets` variable below!
+
+snippets: "/snippets_library/EPCC_ARCHER2_slurm"
+
+local:
+  prompt: "[user@laptop ~]$"
+  bash_shebang: "#!/bin/bash"
+
+remote:
+  name: "ARCHER2"
+  login: "login.archer2.ac.uk"
+  host: "ln03"
+  node: "nid001053"
+  location: "EPCC, The University of Edinburgh"
+  homedir: "/home/ta076/ta076/"
+  user: "userid"
+  prompt: "userid@ln03:~>"
+  prompt-work: "userid@ln03:/work/ta076/ta076/userid>"
+  module_python3: "cray-python"
+  bash_shebang: "#!/bin/bash"
+
+sched:
+  name: "Slurm"
+  reservation: "shortqos"
+  budget: "short"
+  submit:
+    name: "sbatch"
+    options: "--partition=standard --qos=short"
+  queue:
+    debug: ""
+    testing: ""
+  status: "squeue"
+  flag:
+    user: "-u userid"
+    interactive: ""
+    histdetail: "-l -j"
+    name: "--job-name"
+    time: "--time"
+    queue: "--partition"
+    nodes: "--nodes"
+    tasks: ""
+  del: "scancel"
+  interactive: "srun"
+  info: "sinfo"
+  comment: "#SBATCH"
+  hist: "sacct"

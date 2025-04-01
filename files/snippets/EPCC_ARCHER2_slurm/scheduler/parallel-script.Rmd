@@ -1,0 +1,15 @@
+```bash
+#!/bin/bash
+
+#SBATCH --partition=`r config$sched$partition`
+#SBATCH --qos=`r config$sched$qos`
+#SBATCH --reservation=`r config$sched$reservation`
+#SBATCH --time=00:05:00
+
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=16
+
+module load cray-python
+
+srun python pi-mpi.py 10000000
+```

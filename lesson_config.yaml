@@ -1,0 +1,52 @@
+---
+local:
+  prompt: "[you@laptop:~]$"
+  bash_shebang: "#!/usr/bin/env bash"
+
+snippets: HPCC_MagicCastle_slurm
+baseurl: "https://ocaisa.github.io/probable-pancake/"
+
+remote:
+  name: "HPC Carpentry's Cloud Cluster"
+  host_id: #"EPCC_ARCHER2"
+  login: "cluster.hpc-carpentry.org"
+  host: "login1"
+  node: "smnode1"
+  location: "cluster.hpc-carpentry.org"
+  homedir: "/home"
+  user: "yourUsername"
+  prompt: '[yourUsername@login1 ~]'
+  prompt_work: #"userid@uan01:/work/ta114/ta114/userid>"
+  module_python3: "Python"
+  bash_shebang: "#!/bin/bash"
+
+sched:
+  name: "Slurm"
+  submit:
+    name: "sbatch"
+    options: ""
+  queue:
+    debug: "smnode"
+    testing: "cpubase_bycore_b1"
+  status: "squeue"
+  flag:
+    user: "-u yourUsername"
+    interactive: ""
+    histdetail: "-l -j"
+    name: "-J"
+    time: "-t"
+    queue: "-p"
+    nodes: ""
+    tasks: ""
+  del: "scancel"
+  interactive: "srun"
+  info: "sinfo"
+  comment: "#SBATCH"
+  hist: "sacct -u yourUsername"
+  hist_filter: ""
+  partition: "standard"
+  reservation: "shortqos"
+  qos: "short"
+  budget: "short"
+  project: ""
+main_config: "lesson_config_hpcc.yaml"

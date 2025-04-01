@@ -1,0 +1,5 @@
+```output
+This job is running on:
+nid001147
+slurmstepd: error: *** JOB 38193 ON cn01 CANCELLED AT 2017-07-02T16:35:48 DUE TO TIME LIMIT ***
+```

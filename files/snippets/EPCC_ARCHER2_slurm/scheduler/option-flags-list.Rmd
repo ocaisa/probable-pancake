@@ -1,0 +1,5 @@
+* `--nodes=<nodes>` - Number of nodes to use
+* `--ntasks-per-node=<tasks-per-node>` - Number of parallel processes per node
+* `--cpus-per-task=<cpus-per-task>` - Number of cores to assign to each parallel process
+* `--time=<days-hours:minutes:seconds>` - Maximum real-world time (walltime)
+your job will be allowed to run. The `<days>` part can be omitted.

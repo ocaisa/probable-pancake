@@ -1,0 +1,29 @@
+::: challenge
+
+## Configuring parallel jobs
+
+You will see in the job output that information is displayed about
+where each MPI process is running, in particular which node it is
+on.
+
+Modify the pi-mpi-run script that you run a total of 2 nodes and 16 processes;
+but to use only 8 tasks on each of two nodes.
+Check the output file to ensure that you understand the job
+distribution.
+
+:::: solution
+```bash
+#!/bin/bash
+
+#SBATCH --partition=`r config$sched$partition`
+#SBATCH --qos=`r config$sched$qos`
+#SBATCH --time=00:00:30
+
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=8
+
+module load cray-python
+srun python pi-mpi.py 10000000
+```
+::::
+:::

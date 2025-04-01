@@ -1,0 +1,33 @@
+`srun` runs a single command in the queue system and then exits.
+Let's demonstrate this by running the
+`hostname` command with `srun`. (We can cancel an `srun` job with `Ctrl-c`.)
+
+```bash
+`r config$host_prompt_work` srun `r config$sched$submit$options` --time=00:01:00 hostname
+```
+
+```output
+nid001976
+```
+
+`srun` accepts all of the same options as `sbatch`. However, instead of specifying these in a
+script, these options are specified on the command-line when starting a job.
+
+Typically, the resulting shell environment will be the same as that for
+`sbatch`.
+
+### Interactive jobs
+
+Sometimes, you will need a lot of resource for interactive use. Perhaps it's our first time running
+an analysis or we are attempting to debug something that went wrong with a previous job.
+Fortunately, SLURM makes it easy to start an interactive job with `srun`:
+
+```bash
+`r config$host_prompt_work` srun `r config$sched$submit$options` --pty /bin/bash
+```
+
+You should be presented with a bash prompt. Note that the prompt may change
+to reflect your new location, in this case the compute node we are logged on.
+You can also verify this with `hostname`.
+
+When you are done with the interactive job, type `exit` to quit your session.
