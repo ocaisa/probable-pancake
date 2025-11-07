@@ -107,7 +107,7 @@ computer we are logged onto can be checked with the `hostname` command. (You
 may also notice that the current hostname is also part of our prompt!)
 
 ```bash
-[yourUsername@login1 ~] hostname
+[yourUsername@login1 ~]$ hostname
 ```
 
 ```output
@@ -139,7 +139,7 @@ are you working on?
 Use `pwd` to **p**rint the **w**orking **d**irectory path:
 
 ```bash
-[yourUsername@login1 ~] pwd
+[yourUsername@login1 ~]$ pwd
 ```
 
 You can run `ls` to **l**i**s**t the directory contents, though it's
@@ -147,7 +147,7 @@ possible nothing will show up (if no files have been provided). To be sure,
 use the `-a` flag to show hidden files, too.
 
 ```bash
-[yourUsername@login1 ~] ls -a
+[yourUsername@login1 ~]$ ls -a
 ```
 
 At a minimum, this will show the current directory as `.`, and the parent
@@ -200,7 +200,7 @@ For example, we can view all of the worker nodes by running the command
 `sinfo`.
 
 ```bash
-[yourUsername@login1 ~] sinfo
+[yourUsername@login1 ~]$ sinfo
 ```
 
 
@@ -241,7 +241,7 @@ Note that, if you're logged in to the remote computer cluster, you need to
 log out first. To do so, type `Ctrl+d` or `exit`:
 
 ```bash
-[yourUsername@login1 ~] exit
+[yourUsername@login1 ~]$ exit
 [you@laptop:~]$
 ```
 
@@ -285,15 +285,15 @@ Now compare the resources of your computer with those of the head node.
 
 ```bash
 [you@laptop:~]$ ssh yourUsername@cluster.hpc-carpentry.org
-[yourUsername@login1 ~] nproc --all
-[yourUsername@login1 ~] free -m
+[yourUsername@login1 ~]$ nproc --all
+[yourUsername@login1 ~]$ free -m
 ```
 
 You can get more information about the processors using `lscpu`,
 and a lot of detail about the memory by reading the file `/proc/meminfo`:
 
 ```bash
-[yourUsername@login1 ~] less /proc/meminfo
+[yourUsername@login1 ~]$ less /proc/meminfo
 ```
 
 You can also explore the available filesystems using `df` to show **d**isk
@@ -302,7 +302,7 @@ i.e., GB instead of B. The **t**ype flag `-T` shows what kind of filesystem
 each resource is.
 
 ```bash
-[yourUsername@login1 ~] df -Th
+[yourUsername@login1 ~]$ df -Th
 ```
 ::::
 :::
@@ -333,7 +333,7 @@ where your jobs will actually run. Try running this command to see
 the name, CPUs and memory available on one of the worker nodes:
 
 ```bash
-[yourUsername@login1 ~] sinfo -o "%n %c %m" | column -t
+[yourUsername@login1 ~]$ sinfo -o "%n %c %m" | column -t
 ```
 :::
 

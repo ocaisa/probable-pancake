@@ -4,6 +4,8 @@ teaching: 25
 exercises: 10
 ---
 
+
+
 ::::::::::::::::::::::::::::::::::::::: objectives
 
 - Configure secure access to a remote HPC system.
@@ -16,8 +18,6 @@ exercises: 10
 - How do I log in to a remote HPC system?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
 
 ## Secure Connections
 
@@ -35,15 +35,17 @@ results.
 If you have ever opened the Windows Command Prompt or macOS Terminal, you have
 seen a CLI. If you have already taken The Carpentries' courses on the UNIX
 Shell or Version Control, you have used the CLI on your *local machine*
-extensively. The only leap to be made here is to open a CLI on a *remote machine*,
-while taking some precautions so that other folks on the network can't see (or
-change) the commands you're running or the results the remote machine sends
-back. We will use the Secure SHell protocol (or SSH) to open an encrypted
-network connection between two machines, allowing you to send \& receive text
-and data without having to worry about prying eyes.
+extensively. The only leap to be made here is to open a CLI on a *remote
+machine*, while taking some precautions so that other folks on the network
+can't see (or change) the commands you're running or the results the remote
+machine sends back. We will use the Secure SHell protocol (or SSH) to open an
+encrypted network connection between two machines, allowing you to send \&
+receive text and data without having to worry about prying eyes.
 
-![](/fig/connect-to-remote.svg){max-width="50%" alt="Connect to cluster"}
-
+![connect-to-remote.svg](fig/connect-to-remote.svg){
+  max-width="50%"
+  alt="Connect to cluster. "
+}
 
 SSH clients are usually command-line tools, where you provide the remote
 machine address as the only required argument. If your username on the remote
@@ -304,11 +306,9 @@ See the [PuTTY documentation][putty-agent].
 
 ### Transfer Your Public Key
 
-```bash
-[you@laptop:~]$ scp ~/.ssh/id_ed25519.pub yourUsername@cluster.hpc-carpentry.org:~/
-```
 
 
+Visit [https://mokey.cluster.hpc-carpentry.org](https://mokey.cluster.hpc-carpentry.org) to upload your SSH public key. (Remember, it's the one ending in `.pub`!)
 
 ## Log In to the Cluster
 
@@ -337,7 +337,7 @@ on though so we will adopt the following convention:
 
 - `[you@laptop:~]$` when the command is to be entered on a terminal
   connected to your local computer
-- `[yourUsername@login1 ~]` when the command is to be entered on a
+- `[yourUsername@login1 ~]$` when the command is to be entered on a
   terminal connected to the remote system
 - `$` when it really doesn't matter which system the terminal is connected to.
 
@@ -351,7 +351,7 @@ computer we are logged onto can be checked with the `hostname` command. (You
 may also notice that the current hostname is also part of our prompt!)
 
 ```bash
-[yourUsername@login1 ~] hostname
+[yourUsername@login1 ~]$ hostname
 ```
 
 ```output
@@ -362,7 +362,7 @@ So, we're definitely on the remote machine. Next, let's find out where we are
 by running `pwd` to **p**rint the **w**orking **d**irectory.
 
 ```bash
-[yourUsername@login1 ~] pwd
+[yourUsername@login1 ~]$ pwd
 ```
 
 ```output
@@ -372,7 +372,7 @@ by running `pwd` to **p**rint the **w**orking **d**irectory.
 Great, we know where we are! Let's see what's in our current directory:
 
 ```bash
-[yourUsername@login1 ~] ls
+[yourUsername@login1 ~]$ ls
 ```
 
 ```output
@@ -385,7 +385,7 @@ other filesystems. If they did not, your home directory may appear empty. To
 double-check, include hidden files in your directory listing:
 
 ```bash
-[yourUsername@login1 ~] ls -a
+[yourUsername@login1 ~]$ ls -a
 ```
 
 ```output
@@ -419,14 +419,14 @@ If the `.ssh` folder was not listed above, then it does not yet
 exist: create it.
 
 ```bash
-[yourUsername@login1 ~] mkdir ~/.ssh
+[yourUsername@login1 ~]$ mkdir ~/.ssh
 ```
 
 Now, use `cat` to print your public key, but redirect the output, appending it
 to the `authorized_keys` file:
 
 ```bash
-[yourUsername@login1 ~] cat ~/id_ed25519.pub >> ~/.ssh/authorized_keys
+[yourUsername@login1 ~]$ cat ~/id_ed25519.pub >> ~/.ssh/authorized_keys
 ```
 
 That's all! Disconnect, then try to log back into the remote: if your key and
@@ -434,7 +434,7 @@ agent have been configured correctly, you should not be prompted for the
 password for your SSH key.
 
 ```bash
-[yourUsername@login1 ~] logout
+[yourUsername@login1 ~]$ logout
 ```
 
 ```bash

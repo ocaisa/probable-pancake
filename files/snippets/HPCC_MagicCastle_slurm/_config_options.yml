@@ -11,11 +11,11 @@
 # Compute responsibly.
 ---
 
-snippets: "/snippets_library/HPCC_MagicCastle_slurm"
+snippets: "HPCC_MagicCastle_slurm"
 
 local:
   prompt: "[you@laptop:~]$"
-  bash_shebang: "#!/usr/bin/env bash"
+  shebang: "#!/bin/bash"
 
 remote:
   name: "HPC Carpentry's Cloud Cluster"
@@ -28,7 +28,10 @@ remote:
   user: "yourUsername"
   module_python3: "Python"
   prompt: "[yourUsername@login1 ~]$"
-  bash_shebang: "#!/bin/bash"
+  shebang: "#!/bin/bash"
+  modules:
+    python: "Python"
+
 
 sched:
   name: "Slurm"

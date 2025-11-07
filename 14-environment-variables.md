@@ -204,8 +204,8 @@ job was submitted.
 ## Solution
 
 ```bash
-[yourUsername@login1 ~] nano example-job.sh
-[yourUsername@login1 ~] cat example-job.sh
+[yourUsername@login1 ~]$ nano example-job.sh
+[yourUsername@login1 ~]$ cat example-job.sh
 ```
 
 ```output
@@ -276,7 +276,7 @@ unless we type in the full path to the program,
 since the directory `/users/vlad` isn't in `PATH`.
 
 This means that I can have executables in lots of different places as long as
-I remember that I need to to update my `PATH` so that my shell can find them.
+I remember that I need to update my `PATH` so that my shell can find them.
 
 What if I want to run two different versions of the same program?
 Since they share the same name, if I add them both to my `PATH` the first one

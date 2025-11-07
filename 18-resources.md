@@ -28,8 +28,8 @@ might matter.
 
 ## Estimating Required Resources Using the Scheduler
 
-Although we covered requesting resources from the scheduler earlier with the
-π code, how do we know what type of resources the software will need in
+Although we covered requesting resources from the scheduler earlier,
+how do we know what type of resources the software will need in
 the first place, and its demand for each? In general, unless the software
 documentation or user testimonials provide some idea, we won't know how much
 memory or compute time a program will need.
@@ -63,8 +63,9 @@ scheduler to see how long our job took and what resources were used. We will
 use `sacct -u yourUsername` to get statistics about `parallel-job.sh`.
 
 ```bash
-[yourUsername@login1 ~] sacct -u yourUsername
+[yourUsername@login1 ~]$ sacct -u yourUsername
 ```
+
 
 ```output
        JobID    JobName  Partition    Account  AllocCPUS      State ExitCode
@@ -86,7 +87,7 @@ To get info about a specific job (for example, 347087), we change command
 slightly.
 
 ```bash
-[yourUsername@login1 ~] sacct -u yourUsername -l -j 347087
+[yourUsername@login1 ~]$ sacct -u yourUsername -l -j 347087
 ```
 
 It will show a lot of info; in fact, every single piece of info collected on
@@ -95,7 +96,7 @@ information to `less` to make it easier to view (use the left and right arrow
 keys to scroll through fields).
 
 ```bash
-[yourUsername@login1 ~] sacct -u yourUsername -l -j 347087 | less -S
+[yourUsername@login1 ~]$ sacct -u yourUsername -l -j 347087 | less -S
 ```
 
 ::::::::::::::::::::::::::::::::::::::  discussion
