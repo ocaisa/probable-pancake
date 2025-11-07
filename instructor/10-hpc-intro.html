@@ -20,7 +20,7 @@
       <div class="large-logo">
         <img id="cp-logo" alt="Lesson Description" src="../assets/images/carpentries-logo.svg"><span class="badge text-bg-warning">
           <abbr title="This lesson is in the alpha phase, which means that it has been taught once and lesson authors are iterating on feedback.">
-            <a href="https://cdh.carpentries.org/the-lesson-life-cycle.html#field-testing-alpha-stage" class="external-link alert-link">
+            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
               <i aria-hidden="true" class="icon" data-feather="alert-triangle" style="border-radius: 5px"></i>
               Alpha
             </a>
@@ -99,8 +99,7 @@
           <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             More <i data-feather="chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><li><a class="dropdown-item" href="learner-prerequisites.html">Learner Prerequisites</a></li><li><a class="dropdown-item" href="learner-profiles.html">Learner Profiles</a></li><hr><li><a class="dropdown-item" href="discuss.html">Taking Your Next Steps</a></li><li><a class="dropdown-item" href="reference.html">Knowledge Base</a></li>
-          </ul></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><hr></ul></li>
       </ul></div>
     <!--
     <form class="d-flex col-md-2 search-form">
@@ -326,8 +325,7 @@
                       <li>
                         <a href="../instructor/images.html">Extract All Images</a>
                       </li>
-                      <li><a href="learner-prerequisites.html">Learner Prerequisites</a></li><li><a href="learner-profiles.html">Learner Profiles</a></li><hr><li><a class="dropdown-item" href="discuss.html">Taking Your Next Steps</a></li><li><a class="dropdown-item" href="reference.html">Knowledge Base</a></li>
-                    </ul></div>
+                      <hr></ul></div>
                 </div>
               </div>
             </div>
@@ -362,9 +360,9 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Why use a Cluster?</h1>
-        <p>Last updated on 2025-03-20 |
+        <p>Last updated on 2025-11-07 |
 
-        <a href="https://github.com/ocaisa/probable-pancake/edit/main/episodes/10-hpc-intro.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/ocaisa/probable-pancake/edit/main/episodes/10-hpc-intro.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
 
 
@@ -402,7 +400,7 @@
 <p>Frequently, research problems that use computing can outgrow the
 capabilities of the desktop or laptop computer where they started:</p>
 <ul><li>A statistics student wants to cross-validate a model. This involves
-running the model 1000 times – but each run takes an hour. Running the
+running the model 1000 times — but each run takes an hour. Running the
 model on a laptop will take over a month! In this research problem,
 final results are calculated after all 1000 models have run, but
 typically only one model is run at a time (in <strong>serial</strong>)
@@ -412,7 +410,7 @@ at once (in <strong>parallel</strong>).</li>
 <li>A genomics researcher has been using small datasets of sequence
 data, but soon will be receiving a new type of sequencing data that is
 10 times as large. It’s already challenging to open the datasets on a
-computer – analyzing these larger datasets will probably crash it. In
+computer — analyzing these larger datasets will probably crash it. In
 this research problem, the calculations required might be impossible to
 parallelize, but a computer with <strong>more memory</strong> would be
 required to analyze the much larger future data set.</li>
@@ -434,14 +432,15 @@ network.</li>
 Those computers should be usable at the same time, <strong>solving many
 researchers’ problems in parallel</strong>.</p>
 <section><h2 class="section-heading" id="jargon-busting-presentation">Jargon Busting Presentation<a class="anchor" aria-label="anchor" href="#jargon-busting-presentation"></a></h2>
-<hr class="half-width"><p>Open the <a href="../files/jargon#p1">HPC Jargon Buster</a> in a new
-tab. To present the content, press <code>C</code> to open a
+<hr class="half-width"><p>Open the <a href="../files/jargon.html#p1">HPC Jargon Buster</a> in a
+new tab. To present the content, press <code>C</code> to open a
 <strong>c</strong>lone in a separate window, then press <code>P</code>
 to toggle <strong>p</strong>resentation mode.</p>
 <div id="ive-never-used-a-server-have-i" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="ive-never-used-a-server-have-i" class="callout-inner">
 <h3 class="callout-title">I’ve Never Used a Server, Have I?</h3>
 <div class="callout-content">
@@ -458,7 +457,7 @@ results.</p>
   Some Ideas
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ul><li>Checking email: your computer (possibly in your pocket) contacts a
 remote machine, authenticates, and downloads a list of new messages; it
@@ -471,13 +470,11 @@ against a massive database of all known sites, looking for matches. This
 a <a href="https://en.wikipedia.org/wiki/MapReduce" class="external-link">monumental task</a>!
 Servers are involved at every step.</li>
 <li>Searching for directions on a mapping website involves connecting
-your
-<ol style="list-style-type: upper-alpha"><li>starting and (B) end points by <a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm" class="external-link">traversing a
+your (A) starting and (B) end points by <a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm" class="external-link">traversing a
 graph</a> in search of the “shortest” path by distance, time, expense,
 or another metric. Converting a map into the right form is relatively
 simple, but calculating all the possible routes between A and B is
 expensive.</li>
-</ol></li>
 </ul><p>Checking email could be serial: your machine connects to one server
 and exchanges data. Searching by querying the database for your search
 term (or endpoints) could also be serial, in that one machine receives
@@ -493,8 +490,8 @@ collection of servers working together.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
+<span class="callout-header">Key Points</span>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>High Performance Computing (HPC) typically involves connecting to
 very large computing systems elsewhere in the world.</li>
@@ -530,7 +527,7 @@ command line interface.</li>
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
 
-        <a href="https://github.com/ocaisa/probable-pancake/edit/main/episodes/10-hpc-intro.md" class="external-link">Edit on GitHub</a>
+        <a href="https://github.com/ocaisa/probable-pancake/edit/main/episodes/10-hpc-intro.Rmd" class="external-link">Edit on GitHub</a>
 
 	
         | <a href="https://github.com/ocaisa/probable-pancake/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
@@ -542,7 +539,7 @@ command line interface.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.11" class="external-link">sandpaper (0.16.11)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.5" class="external-link">varnish (1.0.5)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.17.1" class="external-link">sandpaper (0.17.1)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.7" class="external-link">varnish (1.0.7)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -553,10 +550,10 @@ command line interface.</li>
   <script type="application/ld+json">
     {
   "@context": "https://schema.org",
-  "@type": "TrainingMaterial",
+  "@type": "LearningResource",
   "@id": "https://ocaisa.github.io/probable_pancake/instructor/10-hpc-intro.html",
   "inLanguage": "en",
-  "dct:conformsTo": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+  "dct:conformsTo": "https://bioschemas.org/profiles/LearningResource/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
   "keywords": "software, data, lesson, The Carpentries",
   "name": "Why use a Cluster?",
@@ -564,8 +561,8 @@ command line interface.</li>
   "url": "https://ocaisa.github.io/probable_pancake/instructor/10-hpc-intro.html",
   "identifier": "https://ocaisa.github.io/probable_pancake/instructor/10-hpc-intro.html",
   "dateCreated": "2017-03-24",
-  "dateModified": "2025-03-20",
-  "datePublished": "2025-03-20"
+  "dateModified": "2025-11-07",
+  "datePublished": "2025-11-07"
 }
 
   </script><script>
